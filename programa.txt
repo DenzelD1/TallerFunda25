@@ -1,0 +1,30 @@
+a devote 10
+b devote 20
+c devote "Hola"
+mult devote a forge b
+judge(a < b) {
+print("a es menor que b")
+} exile {
+print("a es mayor que b")
+}
+print(mult)
+print(c)
+saludo devote c unir " Mundo"
+print(saludo)
+x devote 10
+y devote 20
+vigil (x < y) {
+    print(x)
+    x devote x inherit 1
+    judge(x == 15) {
+        print("La variable x se encuentra en el numero 15")
+    }
+}
+dividir devote b cleave 0
+divisionCorrecta devote b cleave a
+print(divisionCorrecta)
+contador devote 1
+march(iterar devote 10; iterar > 5; iterar devote iterar plunder 1) {
+    valor devote iterar forge 5
+    print(valor)
+}
