@@ -1,0 +1,7 @@
+TIPO                 | VALOR                          | LINEA | POSICION
+----------------------------------------------------------------------
+PARIAS               | parias                         | 3     | 0    
+PARIZQ               | (                              | 3     | 6    
+IDENTIFICADOR        | x                              | 3     | 7    
+PARDER               | )                              | 3     | 8    
+PUNTOYCOMA           | ;                              | 3     | 9    

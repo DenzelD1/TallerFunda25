@@ -9,6 +9,7 @@ tokens = (
     'MAYORIGUAL',
     'MENORIGUAL',
     'IGUAL',
+    'DESIGUAL',
     'AND',
     'OR',
     'NOT',
@@ -16,7 +17,6 @@ tokens = (
     'PARDER',
     'LLAVEIZQ',
     'LLAVEDER',
-    'COMA',
     'PUNTOYCOMA',
 )
 
@@ -35,6 +35,7 @@ reservadas = {
     'unir' : 'UNIR',
     'menos' : 'MENOS',
     'parias' : 'PARIAS',
+    'inquire': 'INQUIRE',
 }
 
 tokens = tokens + tuple(reservadas.values())
@@ -44,6 +45,7 @@ t_MENOR = r'<'
 t_MAYORIGUAL = r'>='
 t_MENORIGUAL = r'<='
 t_IGUAL = r'=='
+t_DESIGUAL = r'!='
 t_AND = r'&&'
 t_OR = r'\|\|'
 t_NOT = r'!'
@@ -51,10 +53,13 @@ t_PARIZQ = r'\('
 t_PARDER = r'\)'
 t_LLAVEIZQ = r'\{'
 t_LLAVEDER = r'\}'
-t_COMA = r','
 t_PUNTOYCOMA = r';'
 
 t_ignore = ' \t'
+
+def t_ignore_COMMENT(t):
+    r'//.*'
+    pass
 
 def t_newline(t):
     r'\n+'
@@ -65,7 +70,6 @@ def t_IDENTIFICADOR_INVALIDO(t):
     print(f"Error lexico: El nombre de una variable no puede comenzar con un numero -> {t.value}")
     t.lexer.skip(len(t.value))
     return None
-
 
 def t_COMILLAS_NO_CERRADAS(t):
     r'\"[^\"]*$'
@@ -81,7 +85,10 @@ def t_IDENTIFICADOR(t):
 
 def t_NUMERO(t):
     r'\d+(\.\d+)?'
-    t.value = float(t.value)
+    if '.' in t.value:
+        t.value = float(t.value)
+    else:
+        t.value = int(t.value)
     return t
 
 def t_CADENA(t):

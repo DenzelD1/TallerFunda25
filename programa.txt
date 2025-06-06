@@ -1,30 +1,85 @@
-a devote 10
-b devote 20
-c devote "Hola"
-mult devote a forge b
-judge(a < b) {
-print("a es menor que b")
+// CODIGO PARA PROBAR
+
+print("------------- PRUEBA 1 -------------");
+entero devote 100;
+flotante devote 25.5;
+cadena devote "Hola, ";
+
+print("Variable entera:");
+print(entero);
+print("Variable flotante:");
+print(flotante);
+print("Variable de cadena:");
+print(cadena);
+
+suma devote entero inherit 20; 
+resta devote suma plunder 50; 
+multiplicacion devote resta forge 2; 
+division devote multiplicacion cleave 10; 
+modulo devote 10 shatter 3;
+
+print("Suma (100 + 20):");
+print(suma);
+print("Resta (120 - 50):");
+print(resta);
+print("Multiplicacion (70 * 2):");
+print(multiplicacion);
+print("Division (140 / 10):");
+print(division);
+print("Modulo (10 % 3):");
+print(modulo);
+
+negativo devote menos 5;
+print("Numero negativo:");
+print(negativo);
+
+
+saludo devote cadena unir "Mundo";
+print(saludo);
+
+print("------------- PRUEBA 2 -------------");
+valorSecreto devote 42;
+judge (valorSecreto == 42 && (suma > 100 || resta < 50)) {
+    print("Condicion verdadera.");
 } exile {
-print("a es mayor que b")
+    print("Condicion falsa.");
 }
-print(mult)
-print(c)
-saludo devote c unir " Mundo"
-print(saludo)
-x devote 10
-y devote 20
-vigil (x < y) {
-    print(x)
-    x devote x inherit 1
-    judge(x == 15) {
-        print("La variable x se encuentra en el numero 15")
-    }
+
+judge (valorSecreto != 42) {
+    print("El valor secreto no es 42.");
+} exile {
+    print("El valor secreto no es diferente de 42");
 }
-dividir devote b cleave 0
-divisionCorrecta devote b cleave a
-print(divisionCorrecta)
-contador devote 1
-march(iterar devote 10; iterar > 5; iterar devote iterar plunder 1) {
-    valor devote iterar forge 5
-    print(valor)
+
+contador devote 3;
+vigil (contador > 0) {
+    print("Contador en:");
+    print(contador);
+    contador devote contador plunder 1;
 }
+print("Fin del bucle vigil.");
+
+march (i devote 1; i <= 3; i devote i inherit 1) {
+    print("Iteracion del bucle march:");
+    print(i);
+}
+print("Fin del bucle march.");
+
+print("------------- PRUEBA 3 -------------");
+nombreUsuario devote inquire("Ingrese nombre: ");
+print("Bienvenido, " unir nombreUsuario);
+edadUsuario devote inquire("Ingrese edad: ");
+
+judge(edadUsuario >= 18) {
+    print("Eres mayor de edad.");
+} exile {
+    print("Eres menor de edad.");
+}
+
+print("------------- PRUEBA 4 -------------");
+capital devote 1000;
+print("Capital inicial:");
+print(capital);
+parias(capital);
+print("Capital despues del impuesto es:");
+print(capital);

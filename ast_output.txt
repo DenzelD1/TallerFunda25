@@ -1,0 +1,3 @@
+BlockNode
+    PariasCallNode: parias
+        IdentifierNode: x
