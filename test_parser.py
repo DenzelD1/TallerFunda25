@@ -58,10 +58,10 @@ def run_interactive_mode():
     print("    ---Revisar contenido detallado de analizador sintactico")
     print("        > (Windows) Escriba 'type parser.out'")
     print("        > (Linux) Escriba 'cat parser.out'")
-    context = {} 
 
     while True:
         try:
+            context = {}
             print("\n>>> Escriba su codigo aqui <<<")
             input_code = sys.stdin.read()
             
