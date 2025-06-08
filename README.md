@@ -56,7 +56,9 @@ Instalar la libreria PLY
 -> for = march
 -> while = vigil
 -> print = print
+-> concatenar = unir
 -> negativo (numero) = menos
+-> input() = inquire()
 -> funcion personalizada = parias(variable)
 ```
 ## Ejemplos de codigo (actualmente en programa.txt)
