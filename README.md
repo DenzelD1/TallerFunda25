@@ -32,7 +32,7 @@ Instalar la libreria PLY
 #### Modo Archivo
 ```python3 test_parser.py <programa_ejecutable>.txt```
 
-### Modo Interactivo
+#### Modo Interactivo
 ```python3 test_parser.py```
 
 ### Windows
@@ -42,6 +42,21 @@ Instalar la libreria PLY
 
 ### Modo Interactivo
 ```python test_parser.py```
+
+## Diccionario (Tenga en cuenta que algunos deben de llevar ';')
++ = inherit
+- = plunder
+* = forge
+/ = cleave
+% = shatter
+asignacion de variable(=) = devote
+if = judge
+else = exile
+for = march
+while = vigil
+print = print
+negativo (numero) = menos
+funcion personalizada = parias(variable)
 
 ## Ejemplos de codigo (actualmente en programa.txt)
 ```
