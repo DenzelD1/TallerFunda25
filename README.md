@@ -44,19 +44,19 @@ Instalar la libreria PLY
 ```python test_parser.py```
 
 ## Diccionario (Tenga en cuenta que algunos deben de llevar ';')
-+ = inherit
-- = plunder
-* = forge
-/ = cleave
-% = shatter
-asignacion de variable(=) = devote
-if = judge
-else = exile
-for = march
-while = vigil
-print = print
-negativo (numero) = menos
-funcion personalizada = parias(variable)
+-> + = inherit
+-> - = plunder
+-> * = forge
+-> / = cleave
+-> % = shatter
+-> asignacion de variable(=) = devote
+-> if = judge
+-> else = exile
+-> for = march
+-> while = vigil
+-> print = print
+-> negativo (numero) = menos
+-> funcion personalizada = parias(variable)
 
 ## Ejemplos de codigo (actualmente en programa.txt)
 ```
