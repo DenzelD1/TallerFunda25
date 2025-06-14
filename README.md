@@ -1,8 +1,9 @@
 # TallerFunda25
 
-## Integrante
+## Integrantes
 
 Denzel Martin Delgado Urquieta, 21.401.250-2, denzel.delgado@alumnos.ucn.cl, ITI.
+Darwin Mauricio Tapia Urrutia, 21.599.630-1, darwin.tapia@alumnos.ucn.cl, ITI.
 
 ## Lenguaje Medievo
 Es un lenguaje de programación que consta en una mezcla del lenguaje C++ y Python con la intencionalidad de agregar caracterizaciones medievales. Asimismo, cuenta con una funcion única relacionada a la edad media llamada "parias", cuyo uso de concepto difiere ligeramente, sin embargo, mantiene el significado mismo del periodo.
