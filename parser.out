@@ -40,12 +40,15 @@ Rule 34    expresion -> MENOS expresion
 Rule 35    print -> PRINT PARIZQ expresion PARDER
 Rule 36    expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER
 Rule 37    expresion -> INQUIRE PARIZQ expresion PARDER
+Rule 38    expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
 Terminals, with rules where they appear
 
 AND                  : 21
 ASIGNAR              : 8
 CADENA               : 31
+COMA                 : 38
+CONQUISTAR           : 38
 DESIGUAL             : 20
 DIVISION             : 13
 ELSE                 : 25
@@ -66,9 +69,9 @@ MULTIPLICACION       : 12
 NOT                  : 23
 NUMERO               : 32
 OR                   : 22
-PARDER               : 24 25 26 27 30 35 36 37
+PARDER               : 24 25 26 27 30 35 36 37 38
 PARIAS               : 36
-PARIZQ               : 24 25 26 27 30 35 36 37
+PARIZQ               : 24 25 26 27 30 35 36 37 38
 PRINT                : 35
 PUNTOYCOMA           : 3 4 6 27 27
 RESTA                : 11
@@ -83,7 +86,7 @@ asignacion           : 3 27 27
 bloque               : 24 25 25 26 27 29
 ciclo                : 7
 condicional          : 5
-expresion            : 4 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 24 25 26 27 30 34 35 37
+expresion            : 4 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 24 25 26 27 30 34 35 37 38 38
 inicio               : 2 0
 print                : 6
 sentencia            : 2 29
@@ -123,6 +126,7 @@ state 0
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
     (35) print -> . PRINT PARIZQ expresion PARDER
@@ -138,10 +142,11 @@ state 0
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
-    IF              shift and go to state 16
-    PRINT           shift and go to state 17
-    WHILE           shift and go to state 18
-    FOR             shift and go to state 19
+    CONQUISTAR      shift and go to state 16
+    IF              shift and go to state 17
+    PRINT           shift and go to state 18
+    WHILE           shift and go to state 19
+    FOR             shift and go to state 20
 
     inicio                         shift and go to state 1
     sentencia                      shift and go to state 2
@@ -190,6 +195,7 @@ state 2
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
     (35) print -> . PRINT PARIZQ expresion PARDER
@@ -205,13 +211,14 @@ state 2
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
-    IF              shift and go to state 16
-    PRINT           shift and go to state 17
-    WHILE           shift and go to state 18
-    FOR             shift and go to state 19
+    CONQUISTAR      shift and go to state 16
+    IF              shift and go to state 17
+    PRINT           shift and go to state 18
+    WHILE           shift and go to state 19
+    FOR             shift and go to state 20
 
     sentencia                      shift and go to state 2
-    inicio                         shift and go to state 20
+    inicio                         shift and go to state 21
     asignacion                     shift and go to state 3
     expresion                      shift and go to state 4
     condicional                    shift and go to state 5
@@ -222,7 +229,7 @@ state 3
 
     (3) sentencia -> asignacion . PUNTOYCOMA
 
-    PUNTOYCOMA      shift and go to state 21
+    PUNTOYCOMA      shift and go to state 22
 
 
 state 4
@@ -243,21 +250,21 @@ state 4
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PUNTOYCOMA      shift and go to state 22
-    UNIR            shift and go to state 23
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
-    AND             shift and go to state 35
-    OR              shift and go to state 36
+    PUNTOYCOMA      shift and go to state 23
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
 
 state 5
@@ -272,6 +279,7 @@ state 5
     MENOS           reduce using rule 5 (sentencia -> condicional .)
     PARIAS          reduce using rule 5 (sentencia -> condicional .)
     INQUIRE         reduce using rule 5 (sentencia -> condicional .)
+    CONQUISTAR      reduce using rule 5 (sentencia -> condicional .)
     IF              reduce using rule 5 (sentencia -> condicional .)
     PRINT           reduce using rule 5 (sentencia -> condicional .)
     WHILE           reduce using rule 5 (sentencia -> condicional .)
@@ -284,7 +292,7 @@ state 6
 
     (6) sentencia -> print . PUNTOYCOMA
 
-    PUNTOYCOMA      shift and go to state 37
+    PUNTOYCOMA      shift and go to state 38
 
 
 state 7
@@ -299,6 +307,7 @@ state 7
     MENOS           reduce using rule 7 (sentencia -> ciclo .)
     PARIAS          reduce using rule 7 (sentencia -> ciclo .)
     INQUIRE         reduce using rule 7 (sentencia -> ciclo .)
+    CONQUISTAR      reduce using rule 7 (sentencia -> ciclo .)
     IF              reduce using rule 7 (sentencia -> ciclo .)
     PRINT           reduce using rule 7 (sentencia -> ciclo .)
     WHILE           reduce using rule 7 (sentencia -> ciclo .)
@@ -312,7 +321,7 @@ state 8
     (8) asignacion -> IDENTIFICADOR . ASIGNAR expresion
     (33) expresion -> IDENTIFICADOR .
 
-    ASIGNAR         shift and go to state 38
+    ASIGNAR         shift and go to state 39
     PUNTOYCOMA      reduce using rule 33 (expresion -> IDENTIFICADOR .)
     UNIR            reduce using rule 33 (expresion -> IDENTIFICADOR .)
     SUMA            reduce using rule 33 (expresion -> IDENTIFICADOR .)
@@ -355,17 +364,19 @@ state 9
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 39
+    expresion                      shift and go to state 40
 
 state 10
 
@@ -392,17 +403,19 @@ state 10
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 41
+    expresion                      shift and go to state 42
 
 state 11
 
@@ -424,6 +437,7 @@ state 11
     AND             reduce using rule 31 (expresion -> CADENA .)
     OR              reduce using rule 31 (expresion -> CADENA .)
     PARDER          reduce using rule 31 (expresion -> CADENA .)
+    COMA            reduce using rule 31 (expresion -> CADENA .)
 
 
 state 12
@@ -446,6 +460,7 @@ state 12
     AND             reduce using rule 32 (expresion -> NUMERO .)
     OR              reduce using rule 32 (expresion -> NUMERO .)
     PARDER          reduce using rule 32 (expresion -> NUMERO .)
+    COMA            reduce using rule 32 (expresion -> NUMERO .)
 
 
 state 13
@@ -473,69 +488,78 @@ state 13
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 42
+    expresion                      shift and go to state 43
 
 state 14
 
     (36) expresion -> PARIAS . PARIZQ IDENTIFICADOR PARDER
 
-    PARIZQ          shift and go to state 43
+    PARIZQ          shift and go to state 44
 
 
 state 15
 
     (37) expresion -> INQUIRE . PARIZQ expresion PARDER
 
-    PARIZQ          shift and go to state 44
+    PARIZQ          shift and go to state 45
 
 
 state 16
 
-    (24) condicional -> IF . PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
-    (25) condicional -> IF . PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
-
-    PARIZQ          shift and go to state 45
-
-
-state 17
-
-    (35) print -> PRINT . PARIZQ expresion PARDER
+    (38) expresion -> CONQUISTAR . PARIZQ expresion COMA expresion PARDER
 
     PARIZQ          shift and go to state 46
 
 
-state 18
+state 17
 
-    (26) ciclo -> WHILE . PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
+    (24) condicional -> IF . PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
+    (25) condicional -> IF . PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
 
     PARIZQ          shift and go to state 47
 
 
-state 19
+state 18
 
-    (27) ciclo -> FOR . PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
+    (35) print -> PRINT . PARIZQ expresion PARDER
 
     PARIZQ          shift and go to state 48
 
 
+state 19
+
+    (26) ciclo -> WHILE . PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
+
+    PARIZQ          shift and go to state 49
+
+
 state 20
+
+    (27) ciclo -> FOR . PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
+
+    PARIZQ          shift and go to state 50
+
+
+state 21
 
     (2) inicio -> sentencia inicio .
 
     $end            reduce using rule 2 (inicio -> sentencia inicio .)
 
 
-state 21
+state 22
 
     (3) sentencia -> asignacion PUNTOYCOMA .
 
@@ -547,6 +571,7 @@ state 21
     MENOS           reduce using rule 3 (sentencia -> asignacion PUNTOYCOMA .)
     PARIAS          reduce using rule 3 (sentencia -> asignacion PUNTOYCOMA .)
     INQUIRE         reduce using rule 3 (sentencia -> asignacion PUNTOYCOMA .)
+    CONQUISTAR      reduce using rule 3 (sentencia -> asignacion PUNTOYCOMA .)
     IF              reduce using rule 3 (sentencia -> asignacion PUNTOYCOMA .)
     PRINT           reduce using rule 3 (sentencia -> asignacion PUNTOYCOMA .)
     WHILE           reduce using rule 3 (sentencia -> asignacion PUNTOYCOMA .)
@@ -555,7 +580,7 @@ state 21
     LLAVEDER        reduce using rule 3 (sentencia -> asignacion PUNTOYCOMA .)
 
 
-state 22
+state 23
 
     (4) sentencia -> expresion PUNTOYCOMA .
 
@@ -567,6 +592,7 @@ state 22
     MENOS           reduce using rule 4 (sentencia -> expresion PUNTOYCOMA .)
     PARIAS          reduce using rule 4 (sentencia -> expresion PUNTOYCOMA .)
     INQUIRE         reduce using rule 4 (sentencia -> expresion PUNTOYCOMA .)
+    CONQUISTAR      reduce using rule 4 (sentencia -> expresion PUNTOYCOMA .)
     IF              reduce using rule 4 (sentencia -> expresion PUNTOYCOMA .)
     PRINT           reduce using rule 4 (sentencia -> expresion PUNTOYCOMA .)
     WHILE           reduce using rule 4 (sentencia -> expresion PUNTOYCOMA .)
@@ -575,7 +601,7 @@ state 22
     LLAVEDER        reduce using rule 4 (sentencia -> expresion PUNTOYCOMA .)
 
 
-state 23
+state 24
 
     (9) expresion -> expresion UNIR . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -600,19 +626,21 @@ state 23
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 49
+    expresion                      shift and go to state 51
 
-state 24
+state 25
 
     (10) expresion -> expresion SUMA . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -637,19 +665,21 @@ state 24
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 50
+    expresion                      shift and go to state 52
 
-state 25
+state 26
 
     (11) expresion -> expresion RESTA . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -674,19 +704,21 @@ state 25
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 51
+    expresion                      shift and go to state 53
 
-state 26
+state 27
 
     (12) expresion -> expresion MULTIPLICACION . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -711,19 +743,21 @@ state 26
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 52
+    expresion                      shift and go to state 54
 
-state 27
+state 28
 
     (13) expresion -> expresion DIVISION . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -748,19 +782,21 @@ state 27
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 53
+    expresion                      shift and go to state 55
 
-state 28
+state 29
 
     (14) expresion -> expresion MODULO . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -785,19 +821,21 @@ state 28
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 54
+    expresion                      shift and go to state 56
 
-state 29
+state 30
 
     (15) expresion -> expresion MAYOR . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -822,19 +860,21 @@ state 29
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 55
+    expresion                      shift and go to state 57
 
-state 30
+state 31
 
     (16) expresion -> expresion MENOR . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -859,19 +899,21 @@ state 30
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 56
+    expresion                      shift and go to state 58
 
-state 31
+state 32
 
     (17) expresion -> expresion MAYORIGUAL . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -896,19 +938,21 @@ state 31
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 57
+    expresion                      shift and go to state 59
 
-state 32
+state 33
 
     (18) expresion -> expresion MENORIGUAL . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -933,19 +977,21 @@ state 32
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 58
+    expresion                      shift and go to state 60
 
-state 33
+state 34
 
     (19) expresion -> expresion IGUAL . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -970,19 +1016,21 @@ state 33
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 59
+    expresion                      shift and go to state 61
 
-state 34
+state 35
 
     (20) expresion -> expresion DESIGUAL . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -1007,19 +1055,21 @@ state 34
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 60
+    expresion                      shift and go to state 62
 
-state 35
+state 36
 
     (21) expresion -> expresion AND . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -1044,19 +1094,21 @@ state 35
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 61
+    expresion                      shift and go to state 63
 
-state 36
+state 37
 
     (22) expresion -> expresion OR . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -1081,19 +1133,21 @@ state 36
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 62
+    expresion                      shift and go to state 64
 
-state 37
+state 38
 
     (6) sentencia -> print PUNTOYCOMA .
 
@@ -1105,6 +1159,7 @@ state 37
     MENOS           reduce using rule 6 (sentencia -> print PUNTOYCOMA .)
     PARIAS          reduce using rule 6 (sentencia -> print PUNTOYCOMA .)
     INQUIRE         reduce using rule 6 (sentencia -> print PUNTOYCOMA .)
+    CONQUISTAR      reduce using rule 6 (sentencia -> print PUNTOYCOMA .)
     IF              reduce using rule 6 (sentencia -> print PUNTOYCOMA .)
     PRINT           reduce using rule 6 (sentencia -> print PUNTOYCOMA .)
     WHILE           reduce using rule 6 (sentencia -> print PUNTOYCOMA .)
@@ -1113,7 +1168,7 @@ state 37
     LLAVEDER        reduce using rule 6 (sentencia -> print PUNTOYCOMA .)
 
 
-state 38
+state 39
 
     (8) asignacion -> IDENTIFICADOR ASIGNAR . expresion
     (9) expresion -> . expresion UNIR expresion
@@ -1138,19 +1193,21 @@ state 38
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 63
+    expresion                      shift and go to state 65
 
-state 39
+state 40
 
     (23) expresion -> NOT expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1179,29 +1236,30 @@ state 39
     AND             reduce using rule 23 (expresion -> NOT expresion .)
     OR              reduce using rule 23 (expresion -> NOT expresion .)
     PARDER          reduce using rule 23 (expresion -> NOT expresion .)
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 23 (expresion -> NOT expresion .)
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
 
   ! SUMA            [ reduce using rule 23 (expresion -> NOT expresion .) ]
   ! RESTA           [ reduce using rule 23 (expresion -> NOT expresion .) ]
   ! MULTIPLICACION  [ reduce using rule 23 (expresion -> NOT expresion .) ]
   ! DIVISION        [ reduce using rule 23 (expresion -> NOT expresion .) ]
   ! MODULO          [ reduce using rule 23 (expresion -> NOT expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 40
+state 41
 
     (33) expresion -> IDENTIFICADOR .
 
@@ -1221,9 +1279,10 @@ state 40
     OR              reduce using rule 33 (expresion -> IDENTIFICADOR .)
     PUNTOYCOMA      reduce using rule 33 (expresion -> IDENTIFICADOR .)
     PARDER          reduce using rule 33 (expresion -> IDENTIFICADOR .)
+    COMA            reduce using rule 33 (expresion -> IDENTIFICADOR .)
 
 
-state 41
+state 42
 
     (30) expresion -> PARIZQ expresion . PARDER
     (9) expresion -> expresion . UNIR expresion
@@ -1241,24 +1300,24 @@ state 41
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PARDER          shift and go to state 64
-    UNIR            shift and go to state 23
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
-    AND             shift and go to state 35
-    OR              shift and go to state 36
+    PARDER          shift and go to state 66
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
 
-state 42
+state 43
 
     (34) expresion -> MENOS expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1292,31 +1351,32 @@ state 42
     AND             reduce using rule 34 (expresion -> MENOS expresion .)
     OR              reduce using rule 34 (expresion -> MENOS expresion .)
     PARDER          reduce using rule 34 (expresion -> MENOS expresion .)
+    COMA            reduce using rule 34 (expresion -> MENOS expresion .)
 
-  ! UNIR            [ shift and go to state 23 ]
-  ! SUMA            [ shift and go to state 24 ]
-  ! RESTA           [ shift and go to state 25 ]
-  ! MULTIPLICACION  [ shift and go to state 26 ]
-  ! DIVISION        [ shift and go to state 27 ]
-  ! MODULO          [ shift and go to state 28 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
-
-
-state 43
-
-    (36) expresion -> PARIAS PARIZQ . IDENTIFICADOR PARDER
-
-    IDENTIFICADOR   shift and go to state 65
+  ! UNIR            [ shift and go to state 24 ]
+  ! SUMA            [ shift and go to state 25 ]
+  ! RESTA           [ shift and go to state 26 ]
+  ! MULTIPLICACION  [ shift and go to state 27 ]
+  ! DIVISION        [ shift and go to state 28 ]
+  ! MODULO          [ shift and go to state 29 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
 state 44
+
+    (36) expresion -> PARIAS PARIZQ . IDENTIFICADOR PARDER
+
+    IDENTIFICADOR   shift and go to state 67
+
+
+state 45
 
     (37) expresion -> INQUIRE PARIZQ . expresion PARDER
     (9) expresion -> . expresion UNIR expresion
@@ -1341,19 +1401,60 @@ state 44
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 66
+    expresion                      shift and go to state 68
 
-state 45
+state 46
+
+    (38) expresion -> CONQUISTAR PARIZQ . expresion COMA expresion PARDER
+    (9) expresion -> . expresion UNIR expresion
+    (10) expresion -> . expresion SUMA expresion
+    (11) expresion -> . expresion RESTA expresion
+    (12) expresion -> . expresion MULTIPLICACION expresion
+    (13) expresion -> . expresion DIVISION expresion
+    (14) expresion -> . expresion MODULO expresion
+    (15) expresion -> . expresion MAYOR expresion
+    (16) expresion -> . expresion MENOR expresion
+    (17) expresion -> . expresion MAYORIGUAL expresion
+    (18) expresion -> . expresion MENORIGUAL expresion
+    (19) expresion -> . expresion IGUAL expresion
+    (20) expresion -> . expresion DESIGUAL expresion
+    (21) expresion -> . expresion AND expresion
+    (22) expresion -> . expresion OR expresion
+    (23) expresion -> . NOT expresion
+    (30) expresion -> . PARIZQ expresion PARDER
+    (31) expresion -> . CADENA
+    (32) expresion -> . NUMERO
+    (33) expresion -> . IDENTIFICADOR
+    (34) expresion -> . MENOS expresion
+    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+
+    NOT             shift and go to state 9
+    PARIZQ          shift and go to state 10
+    CADENA          shift and go to state 11
+    NUMERO          shift and go to state 12
+    IDENTIFICADOR   shift and go to state 41
+    MENOS           shift and go to state 13
+    PARIAS          shift and go to state 14
+    INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
+
+    expresion                      shift and go to state 69
+
+state 47
 
     (24) condicional -> IF PARIZQ . expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> IF PARIZQ . expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
@@ -1379,19 +1480,21 @@ state 45
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 67
+    expresion                      shift and go to state 70
 
-state 46
+state 48
 
     (35) print -> PRINT PARIZQ . expresion PARDER
     (9) expresion -> . expresion UNIR expresion
@@ -1416,19 +1519,21 @@ state 46
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 68
+    expresion                      shift and go to state 71
 
-state 47
+state 49
 
     (26) ciclo -> WHILE PARIZQ . expresion PARDER LLAVEIZQ bloque LLAVEDER
     (9) expresion -> . expresion UNIR expresion
@@ -1453,28 +1558,30 @@ state 47
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 69
+    expresion                      shift and go to state 72
 
-state 48
+state 50
 
     (27) ciclo -> FOR PARIZQ . asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
     (8) asignacion -> . IDENTIFICADOR ASIGNAR expresion
 
-    IDENTIFICADOR   shift and go to state 71
+    IDENTIFICADOR   shift and go to state 74
 
-    asignacion                     shift and go to state 70
+    asignacion                     shift and go to state 73
 
-state 49
+state 51
 
     (9) expresion -> expresion UNIR expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1495,19 +1602,20 @@ state 49
     PUNTOYCOMA      reduce using rule 9 (expresion -> expresion UNIR expresion .)
     UNIR            reduce using rule 9 (expresion -> expresion UNIR expresion .)
     PARDER          reduce using rule 9 (expresion -> expresion UNIR expresion .)
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
-    AND             shift and go to state 35
-    OR              shift and go to state 36
+    COMA            reduce using rule 9 (expresion -> expresion UNIR expresion .)
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
   ! SUMA            [ reduce using rule 9 (expresion -> expresion UNIR expresion .) ]
   ! RESTA           [ reduce using rule 9 (expresion -> expresion UNIR expresion .) ]
@@ -1522,10 +1630,10 @@ state 49
   ! DESIGUAL        [ reduce using rule 9 (expresion -> expresion UNIR expresion .) ]
   ! AND             [ reduce using rule 9 (expresion -> expresion UNIR expresion .) ]
   ! OR              [ reduce using rule 9 (expresion -> expresion UNIR expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
+  ! UNIR            [ shift and go to state 24 ]
 
 
-state 50
+state 52
 
     (10) expresion -> expresion SUMA expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1556,27 +1664,28 @@ state 50
     AND             reduce using rule 10 (expresion -> expresion SUMA expresion .)
     OR              reduce using rule 10 (expresion -> expresion SUMA expresion .)
     PARDER          reduce using rule 10 (expresion -> expresion SUMA expresion .)
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 10 (expresion -> expresion SUMA expresion .)
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
 
   ! MULTIPLICACION  [ reduce using rule 10 (expresion -> expresion SUMA expresion .) ]
   ! DIVISION        [ reduce using rule 10 (expresion -> expresion SUMA expresion .) ]
   ! MODULO          [ reduce using rule 10 (expresion -> expresion SUMA expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! SUMA            [ shift and go to state 24 ]
-  ! RESTA           [ shift and go to state 25 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! SUMA            [ shift and go to state 25 ]
+  ! RESTA           [ shift and go to state 26 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 51
+state 53
 
     (11) expresion -> expresion RESTA expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1607,27 +1716,28 @@ state 51
     AND             reduce using rule 11 (expresion -> expresion RESTA expresion .)
     OR              reduce using rule 11 (expresion -> expresion RESTA expresion .)
     PARDER          reduce using rule 11 (expresion -> expresion RESTA expresion .)
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 11 (expresion -> expresion RESTA expresion .)
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
 
   ! MULTIPLICACION  [ reduce using rule 11 (expresion -> expresion RESTA expresion .) ]
   ! DIVISION        [ reduce using rule 11 (expresion -> expresion RESTA expresion .) ]
   ! MODULO          [ reduce using rule 11 (expresion -> expresion RESTA expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! SUMA            [ shift and go to state 24 ]
-  ! RESTA           [ shift and go to state 25 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! SUMA            [ shift and go to state 25 ]
+  ! RESTA           [ shift and go to state 26 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 52
+state 54
 
     (12) expresion -> expresion MULTIPLICACION expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1660,25 +1770,26 @@ state 52
     AND             reduce using rule 12 (expresion -> expresion MULTIPLICACION expresion .)
     OR              reduce using rule 12 (expresion -> expresion MULTIPLICACION expresion .)
     PARDER          reduce using rule 12 (expresion -> expresion MULTIPLICACION expresion .)
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 12 (expresion -> expresion MULTIPLICACION expresion .)
+    MODULO          shift and go to state 29
 
   ! MODULO          [ reduce using rule 12 (expresion -> expresion MULTIPLICACION expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! SUMA            [ shift and go to state 24 ]
-  ! RESTA           [ shift and go to state 25 ]
-  ! MULTIPLICACION  [ shift and go to state 26 ]
-  ! DIVISION        [ shift and go to state 27 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! SUMA            [ shift and go to state 25 ]
+  ! RESTA           [ shift and go to state 26 ]
+  ! MULTIPLICACION  [ shift and go to state 27 ]
+  ! DIVISION        [ shift and go to state 28 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 53
+state 55
 
     (13) expresion -> expresion DIVISION expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1711,25 +1822,26 @@ state 53
     AND             reduce using rule 13 (expresion -> expresion DIVISION expresion .)
     OR              reduce using rule 13 (expresion -> expresion DIVISION expresion .)
     PARDER          reduce using rule 13 (expresion -> expresion DIVISION expresion .)
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 13 (expresion -> expresion DIVISION expresion .)
+    MODULO          shift and go to state 29
 
   ! MODULO          [ reduce using rule 13 (expresion -> expresion DIVISION expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! SUMA            [ shift and go to state 24 ]
-  ! RESTA           [ shift and go to state 25 ]
-  ! MULTIPLICACION  [ shift and go to state 26 ]
-  ! DIVISION        [ shift and go to state 27 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! SUMA            [ shift and go to state 25 ]
+  ! RESTA           [ shift and go to state 26 ]
+  ! MULTIPLICACION  [ shift and go to state 27 ]
+  ! DIVISION        [ shift and go to state 28 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 54
+state 56
 
     (14) expresion -> expresion MODULO expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1763,24 +1875,25 @@ state 54
     AND             reduce using rule 14 (expresion -> expresion MODULO expresion .)
     OR              reduce using rule 14 (expresion -> expresion MODULO expresion .)
     PARDER          reduce using rule 14 (expresion -> expresion MODULO expresion .)
+    COMA            reduce using rule 14 (expresion -> expresion MODULO expresion .)
 
-  ! UNIR            [ shift and go to state 23 ]
-  ! SUMA            [ shift and go to state 24 ]
-  ! RESTA           [ shift and go to state 25 ]
-  ! MULTIPLICACION  [ shift and go to state 26 ]
-  ! DIVISION        [ shift and go to state 27 ]
-  ! MODULO          [ shift and go to state 28 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! SUMA            [ shift and go to state 25 ]
+  ! RESTA           [ shift and go to state 26 ]
+  ! MULTIPLICACION  [ shift and go to state 27 ]
+  ! DIVISION        [ shift and go to state 28 ]
+  ! MODULO          [ shift and go to state 29 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 55
+state 57
 
     (15) expresion -> expresion MAYOR expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1809,29 +1922,30 @@ state 55
     AND             reduce using rule 15 (expresion -> expresion MAYOR expresion .)
     OR              reduce using rule 15 (expresion -> expresion MAYOR expresion .)
     PARDER          reduce using rule 15 (expresion -> expresion MAYOR expresion .)
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 15 (expresion -> expresion MAYOR expresion .)
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
 
   ! SUMA            [ reduce using rule 15 (expresion -> expresion MAYOR expresion .) ]
   ! RESTA           [ reduce using rule 15 (expresion -> expresion MAYOR expresion .) ]
   ! MULTIPLICACION  [ reduce using rule 15 (expresion -> expresion MAYOR expresion .) ]
   ! DIVISION        [ reduce using rule 15 (expresion -> expresion MAYOR expresion .) ]
   ! MODULO          [ reduce using rule 15 (expresion -> expresion MAYOR expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 56
+state 58
 
     (16) expresion -> expresion MENOR expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1860,29 +1974,30 @@ state 56
     AND             reduce using rule 16 (expresion -> expresion MENOR expresion .)
     OR              reduce using rule 16 (expresion -> expresion MENOR expresion .)
     PARDER          reduce using rule 16 (expresion -> expresion MENOR expresion .)
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 16 (expresion -> expresion MENOR expresion .)
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
 
   ! SUMA            [ reduce using rule 16 (expresion -> expresion MENOR expresion .) ]
   ! RESTA           [ reduce using rule 16 (expresion -> expresion MENOR expresion .) ]
   ! MULTIPLICACION  [ reduce using rule 16 (expresion -> expresion MENOR expresion .) ]
   ! DIVISION        [ reduce using rule 16 (expresion -> expresion MENOR expresion .) ]
   ! MODULO          [ reduce using rule 16 (expresion -> expresion MENOR expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 57
+state 59
 
     (17) expresion -> expresion MAYORIGUAL expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1911,29 +2026,30 @@ state 57
     AND             reduce using rule 17 (expresion -> expresion MAYORIGUAL expresion .)
     OR              reduce using rule 17 (expresion -> expresion MAYORIGUAL expresion .)
     PARDER          reduce using rule 17 (expresion -> expresion MAYORIGUAL expresion .)
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 17 (expresion -> expresion MAYORIGUAL expresion .)
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
 
   ! SUMA            [ reduce using rule 17 (expresion -> expresion MAYORIGUAL expresion .) ]
   ! RESTA           [ reduce using rule 17 (expresion -> expresion MAYORIGUAL expresion .) ]
   ! MULTIPLICACION  [ reduce using rule 17 (expresion -> expresion MAYORIGUAL expresion .) ]
   ! DIVISION        [ reduce using rule 17 (expresion -> expresion MAYORIGUAL expresion .) ]
   ! MODULO          [ reduce using rule 17 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 58
+state 60
 
     (18) expresion -> expresion MENORIGUAL expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -1962,29 +2078,30 @@ state 58
     AND             reduce using rule 18 (expresion -> expresion MENORIGUAL expresion .)
     OR              reduce using rule 18 (expresion -> expresion MENORIGUAL expresion .)
     PARDER          reduce using rule 18 (expresion -> expresion MENORIGUAL expresion .)
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 18 (expresion -> expresion MENORIGUAL expresion .)
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
 
   ! SUMA            [ reduce using rule 18 (expresion -> expresion MENORIGUAL expresion .) ]
   ! RESTA           [ reduce using rule 18 (expresion -> expresion MENORIGUAL expresion .) ]
   ! MULTIPLICACION  [ reduce using rule 18 (expresion -> expresion MENORIGUAL expresion .) ]
   ! DIVISION        [ reduce using rule 18 (expresion -> expresion MENORIGUAL expresion .) ]
   ! MODULO          [ reduce using rule 18 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 59
+state 61
 
     (19) expresion -> expresion IGUAL expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -2013,29 +2130,30 @@ state 59
     AND             reduce using rule 19 (expresion -> expresion IGUAL expresion .)
     OR              reduce using rule 19 (expresion -> expresion IGUAL expresion .)
     PARDER          reduce using rule 19 (expresion -> expresion IGUAL expresion .)
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 19 (expresion -> expresion IGUAL expresion .)
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
 
   ! SUMA            [ reduce using rule 19 (expresion -> expresion IGUAL expresion .) ]
   ! RESTA           [ reduce using rule 19 (expresion -> expresion IGUAL expresion .) ]
   ! MULTIPLICACION  [ reduce using rule 19 (expresion -> expresion IGUAL expresion .) ]
   ! DIVISION        [ reduce using rule 19 (expresion -> expresion IGUAL expresion .) ]
   ! MODULO          [ reduce using rule 19 (expresion -> expresion IGUAL expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 60
+state 62
 
     (20) expresion -> expresion DESIGUAL expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -2064,29 +2182,30 @@ state 60
     AND             reduce using rule 20 (expresion -> expresion DESIGUAL expresion .)
     OR              reduce using rule 20 (expresion -> expresion DESIGUAL expresion .)
     PARDER          reduce using rule 20 (expresion -> expresion DESIGUAL expresion .)
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
+    COMA            reduce using rule 20 (expresion -> expresion DESIGUAL expresion .)
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
 
   ! SUMA            [ reduce using rule 20 (expresion -> expresion DESIGUAL expresion .) ]
   ! RESTA           [ reduce using rule 20 (expresion -> expresion DESIGUAL expresion .) ]
   ! MULTIPLICACION  [ reduce using rule 20 (expresion -> expresion DESIGUAL expresion .) ]
   ! DIVISION        [ reduce using rule 20 (expresion -> expresion DESIGUAL expresion .) ]
   ! MODULO          [ reduce using rule 20 (expresion -> expresion DESIGUAL expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! MAYOR           [ shift and go to state 29 ]
-  ! MENOR           [ shift and go to state 30 ]
-  ! MAYORIGUAL      [ shift and go to state 31 ]
-  ! MENORIGUAL      [ shift and go to state 32 ]
-  ! IGUAL           [ shift and go to state 33 ]
-  ! DESIGUAL        [ shift and go to state 34 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! MAYOR           [ shift and go to state 30 ]
+  ! MENOR           [ shift and go to state 31 ]
+  ! MAYORIGUAL      [ shift and go to state 32 ]
+  ! MENORIGUAL      [ shift and go to state 33 ]
+  ! IGUAL           [ shift and go to state 34 ]
+  ! DESIGUAL        [ shift and go to state 35 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 61
+state 63
 
     (21) expresion -> expresion AND expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -2109,17 +2228,18 @@ state 61
     AND             reduce using rule 21 (expresion -> expresion AND expresion .)
     OR              reduce using rule 21 (expresion -> expresion AND expresion .)
     PARDER          reduce using rule 21 (expresion -> expresion AND expresion .)
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
+    COMA            reduce using rule 21 (expresion -> expresion AND expresion .)
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
 
   ! SUMA            [ reduce using rule 21 (expresion -> expresion AND expresion .) ]
   ! RESTA           [ reduce using rule 21 (expresion -> expresion AND expresion .) ]
@@ -2132,12 +2252,12 @@ state 61
   ! MENORIGUAL      [ reduce using rule 21 (expresion -> expresion AND expresion .) ]
   ! IGUAL           [ reduce using rule 21 (expresion -> expresion AND expresion .) ]
   ! DESIGUAL        [ reduce using rule 21 (expresion -> expresion AND expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! AND             [ shift and go to state 35 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! AND             [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 62
+state 64
 
     (22) expresion -> expresion OR expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -2159,18 +2279,19 @@ state 62
     UNIR            reduce using rule 22 (expresion -> expresion OR expresion .)
     OR              reduce using rule 22 (expresion -> expresion OR expresion .)
     PARDER          reduce using rule 22 (expresion -> expresion OR expresion .)
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
-    AND             shift and go to state 35
+    COMA            reduce using rule 22 (expresion -> expresion OR expresion .)
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
 
   ! SUMA            [ reduce using rule 22 (expresion -> expresion OR expresion .) ]
   ! RESTA           [ reduce using rule 22 (expresion -> expresion OR expresion .) ]
@@ -2184,11 +2305,11 @@ state 62
   ! IGUAL           [ reduce using rule 22 (expresion -> expresion OR expresion .) ]
   ! DESIGUAL        [ reduce using rule 22 (expresion -> expresion OR expresion .) ]
   ! AND             [ reduce using rule 22 (expresion -> expresion OR expresion .) ]
-  ! UNIR            [ shift and go to state 23 ]
-  ! OR              [ shift and go to state 36 ]
+  ! UNIR            [ shift and go to state 24 ]
+  ! OR              [ shift and go to state 37 ]
 
 
-state 63
+state 65
 
     (8) asignacion -> IDENTIFICADOR ASIGNAR expresion .
     (9) expresion -> expresion . UNIR expresion
@@ -2208,23 +2329,23 @@ state 63
 
     PUNTOYCOMA      reduce using rule 8 (asignacion -> IDENTIFICADOR ASIGNAR expresion .)
     PARDER          reduce using rule 8 (asignacion -> IDENTIFICADOR ASIGNAR expresion .)
-    UNIR            shift and go to state 23
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
-    AND             shift and go to state 35
-    OR              shift and go to state 36
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
 
-state 64
+state 66
 
     (30) expresion -> PARIZQ expresion PARDER .
 
@@ -2244,16 +2365,17 @@ state 64
     AND             reduce using rule 30 (expresion -> PARIZQ expresion PARDER .)
     OR              reduce using rule 30 (expresion -> PARIZQ expresion PARDER .)
     PARDER          reduce using rule 30 (expresion -> PARIZQ expresion PARDER .)
+    COMA            reduce using rule 30 (expresion -> PARIZQ expresion PARDER .)
 
 
-state 65
+state 67
 
     (36) expresion -> PARIAS PARIZQ IDENTIFICADOR . PARDER
 
-    PARDER          shift and go to state 72
+    PARDER          shift and go to state 75
 
 
-state 66
+state 68
 
     (37) expresion -> INQUIRE PARIZQ expresion . PARDER
     (9) expresion -> expresion . UNIR expresion
@@ -2271,24 +2393,59 @@ state 66
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PARDER          shift and go to state 73
-    UNIR            shift and go to state 23
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
-    AND             shift and go to state 35
-    OR              shift and go to state 36
+    PARDER          shift and go to state 76
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
 
-state 67
+state 69
+
+    (38) expresion -> CONQUISTAR PARIZQ expresion . COMA expresion PARDER
+    (9) expresion -> expresion . UNIR expresion
+    (10) expresion -> expresion . SUMA expresion
+    (11) expresion -> expresion . RESTA expresion
+    (12) expresion -> expresion . MULTIPLICACION expresion
+    (13) expresion -> expresion . DIVISION expresion
+    (14) expresion -> expresion . MODULO expresion
+    (15) expresion -> expresion . MAYOR expresion
+    (16) expresion -> expresion . MENOR expresion
+    (17) expresion -> expresion . MAYORIGUAL expresion
+    (18) expresion -> expresion . MENORIGUAL expresion
+    (19) expresion -> expresion . IGUAL expresion
+    (20) expresion -> expresion . DESIGUAL expresion
+    (21) expresion -> expresion . AND expresion
+    (22) expresion -> expresion . OR expresion
+
+    COMA            shift and go to state 77
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
+
+
+state 70
 
     (24) condicional -> IF PARIZQ expresion . PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> IF PARIZQ expresion . PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
@@ -2307,24 +2464,24 @@ state 67
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PARDER          shift and go to state 74
-    UNIR            shift and go to state 23
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
-    AND             shift and go to state 35
-    OR              shift and go to state 36
+    PARDER          shift and go to state 78
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
 
-state 68
+state 71
 
     (35) print -> PRINT PARIZQ expresion . PARDER
     (9) expresion -> expresion . UNIR expresion
@@ -2342,24 +2499,24 @@ state 68
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PARDER          shift and go to state 75
-    UNIR            shift and go to state 23
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
-    AND             shift and go to state 35
-    OR              shift and go to state 36
+    PARDER          shift and go to state 79
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
 
-state 69
+state 72
 
     (26) ciclo -> WHILE PARIZQ expresion . PARDER LLAVEIZQ bloque LLAVEDER
     (9) expresion -> expresion . UNIR expresion
@@ -2377,38 +2534,38 @@ state 69
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PARDER          shift and go to state 76
-    UNIR            shift and go to state 23
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
-    AND             shift and go to state 35
-    OR              shift and go to state 36
+    PARDER          shift and go to state 80
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
 
-state 70
+state 73
 
     (27) ciclo -> FOR PARIZQ asignacion . PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
 
-    PUNTOYCOMA      shift and go to state 77
+    PUNTOYCOMA      shift and go to state 81
 
 
-state 71
+state 74
 
     (8) asignacion -> IDENTIFICADOR . ASIGNAR expresion
 
-    ASIGNAR         shift and go to state 38
+    ASIGNAR         shift and go to state 39
 
 
-state 72
+state 75
 
     (36) expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .
 
@@ -2428,9 +2585,10 @@ state 72
     AND             reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
     OR              reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
     PARDER          reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    COMA            reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
 
 
-state 73
+state 76
 
     (37) expresion -> INQUIRE PARIZQ expresion PARDER .
 
@@ -2450,31 +2608,71 @@ state 73
     AND             reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
     OR              reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
     PARDER          reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    COMA            reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
 
 
-state 74
+state 77
+
+    (38) expresion -> CONQUISTAR PARIZQ expresion COMA . expresion PARDER
+    (9) expresion -> . expresion UNIR expresion
+    (10) expresion -> . expresion SUMA expresion
+    (11) expresion -> . expresion RESTA expresion
+    (12) expresion -> . expresion MULTIPLICACION expresion
+    (13) expresion -> . expresion DIVISION expresion
+    (14) expresion -> . expresion MODULO expresion
+    (15) expresion -> . expresion MAYOR expresion
+    (16) expresion -> . expresion MENOR expresion
+    (17) expresion -> . expresion MAYORIGUAL expresion
+    (18) expresion -> . expresion MENORIGUAL expresion
+    (19) expresion -> . expresion IGUAL expresion
+    (20) expresion -> . expresion DESIGUAL expresion
+    (21) expresion -> . expresion AND expresion
+    (22) expresion -> . expresion OR expresion
+    (23) expresion -> . NOT expresion
+    (30) expresion -> . PARIZQ expresion PARDER
+    (31) expresion -> . CADENA
+    (32) expresion -> . NUMERO
+    (33) expresion -> . IDENTIFICADOR
+    (34) expresion -> . MENOS expresion
+    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+
+    NOT             shift and go to state 9
+    PARIZQ          shift and go to state 10
+    CADENA          shift and go to state 11
+    NUMERO          shift and go to state 12
+    IDENTIFICADOR   shift and go to state 41
+    MENOS           shift and go to state 13
+    PARIAS          shift and go to state 14
+    INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
+
+    expresion                      shift and go to state 82
+
+state 78
 
     (24) condicional -> IF PARIZQ expresion PARDER . LLAVEIZQ bloque LLAVEDER
     (25) condicional -> IF PARIZQ expresion PARDER . LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
 
-    LLAVEIZQ        shift and go to state 78
+    LLAVEIZQ        shift and go to state 83
 
 
-state 75
+state 79
 
     (35) print -> PRINT PARIZQ expresion PARDER .
 
     PUNTOYCOMA      reduce using rule 35 (print -> PRINT PARIZQ expresion PARDER .)
 
 
-state 76
+state 80
 
     (26) ciclo -> WHILE PARIZQ expresion PARDER . LLAVEIZQ bloque LLAVEDER
 
-    LLAVEIZQ        shift and go to state 79
+    LLAVEIZQ        shift and go to state 84
 
 
-state 77
+state 81
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA . expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
     (9) expresion -> . expresion UNIR expresion
@@ -2499,19 +2697,56 @@ state 77
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
     CADENA          shift and go to state 11
     NUMERO          shift and go to state 12
-    IDENTIFICADOR   shift and go to state 40
+    IDENTIFICADOR   shift and go to state 41
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 80
+    expresion                      shift and go to state 85
 
-state 78
+state 82
+
+    (38) expresion -> CONQUISTAR PARIZQ expresion COMA expresion . PARDER
+    (9) expresion -> expresion . UNIR expresion
+    (10) expresion -> expresion . SUMA expresion
+    (11) expresion -> expresion . RESTA expresion
+    (12) expresion -> expresion . MULTIPLICACION expresion
+    (13) expresion -> expresion . DIVISION expresion
+    (14) expresion -> expresion . MODULO expresion
+    (15) expresion -> expresion . MAYOR expresion
+    (16) expresion -> expresion . MENOR expresion
+    (17) expresion -> expresion . MAYORIGUAL expresion
+    (18) expresion -> expresion . MENORIGUAL expresion
+    (19) expresion -> expresion . IGUAL expresion
+    (20) expresion -> expresion . DESIGUAL expresion
+    (21) expresion -> expresion . AND expresion
+    (22) expresion -> expresion . OR expresion
+
+    PARDER          shift and go to state 86
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
+
+
+state 83
 
     (24) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ . bloque LLAVEDER
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ . bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
@@ -2545,6 +2780,7 @@ state 78
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
     (35) print -> . PRINT PARIZQ expresion PARDER
@@ -2560,20 +2796,21 @@ state 78
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
-    IF              shift and go to state 16
-    PRINT           shift and go to state 17
-    WHILE           shift and go to state 18
-    FOR             shift and go to state 19
+    CONQUISTAR      shift and go to state 16
+    IF              shift and go to state 17
+    PRINT           shift and go to state 18
+    WHILE           shift and go to state 19
+    FOR             shift and go to state 20
 
     expresion                      shift and go to state 4
-    bloque                         shift and go to state 81
-    sentencia                      shift and go to state 82
+    bloque                         shift and go to state 87
+    sentencia                      shift and go to state 88
     asignacion                     shift and go to state 3
     condicional                    shift and go to state 5
     print                          shift and go to state 6
     ciclo                          shift and go to state 7
 
-state 79
+state 84
 
     (26) ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ . bloque LLAVEDER
     (28) bloque -> .
@@ -2606,6 +2843,7 @@ state 79
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
     (35) print -> . PRINT PARIZQ expresion PARDER
@@ -2621,20 +2859,21 @@ state 79
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
-    IF              shift and go to state 16
-    PRINT           shift and go to state 17
-    WHILE           shift and go to state 18
-    FOR             shift and go to state 19
+    CONQUISTAR      shift and go to state 16
+    IF              shift and go to state 17
+    PRINT           shift and go to state 18
+    WHILE           shift and go to state 19
+    FOR             shift and go to state 20
 
     expresion                      shift and go to state 4
-    bloque                         shift and go to state 83
-    sentencia                      shift and go to state 82
+    bloque                         shift and go to state 89
+    sentencia                      shift and go to state 88
     asignacion                     shift and go to state 3
     condicional                    shift and go to state 5
     print                          shift and go to state 6
     ciclo                          shift and go to state 7
 
-state 80
+state 85
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion . PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
     (9) expresion -> expresion . UNIR expresion
@@ -2652,32 +2891,55 @@ state 80
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PUNTOYCOMA      shift and go to state 84
-    UNIR            shift and go to state 23
-    SUMA            shift and go to state 24
-    RESTA           shift and go to state 25
-    MULTIPLICACION  shift and go to state 26
-    DIVISION        shift and go to state 27
-    MODULO          shift and go to state 28
-    MAYOR           shift and go to state 29
-    MENOR           shift and go to state 30
-    MAYORIGUAL      shift and go to state 31
-    MENORIGUAL      shift and go to state 32
-    IGUAL           shift and go to state 33
-    DESIGUAL        shift and go to state 34
-    AND             shift and go to state 35
-    OR              shift and go to state 36
+    PUNTOYCOMA      shift and go to state 90
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
 
-state 81
+state 86
+
+    (38) expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .
+
+    PUNTOYCOMA      reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    UNIR            reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    SUMA            reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    RESTA           reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MULTIPLICACION  reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    DIVISION        reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MODULO          reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MAYOR           reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MENOR           reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MAYORIGUAL      reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MENORIGUAL      reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    IGUAL           reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    DESIGUAL        reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    AND             reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    OR              reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    PARDER          reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    COMA            reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+
+
+state 87
 
     (24) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque . LLAVEDER
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque . LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
 
-    LLAVEDER        shift and go to state 85
+    LLAVEDER        shift and go to state 91
 
 
-state 82
+state 88
 
     (29) bloque -> sentencia . bloque
     (28) bloque -> .
@@ -2710,6 +2972,7 @@ state 82
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
     (35) print -> . PRINT PARIZQ expresion PARDER
@@ -2725,36 +2988,37 @@ state 82
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
-    IF              shift and go to state 16
-    PRINT           shift and go to state 17
-    WHILE           shift and go to state 18
-    FOR             shift and go to state 19
+    CONQUISTAR      shift and go to state 16
+    IF              shift and go to state 17
+    PRINT           shift and go to state 18
+    WHILE           shift and go to state 19
+    FOR             shift and go to state 20
 
-    sentencia                      shift and go to state 82
-    bloque                         shift and go to state 86
+    sentencia                      shift and go to state 88
+    bloque                         shift and go to state 92
     asignacion                     shift and go to state 3
     expresion                      shift and go to state 4
     condicional                    shift and go to state 5
     print                          shift and go to state 6
     ciclo                          shift and go to state 7
 
-state 83
+state 89
 
     (26) ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque . LLAVEDER
 
-    LLAVEDER        shift and go to state 87
+    LLAVEDER        shift and go to state 93
 
 
-state 84
+state 90
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA . asignacion PARDER LLAVEIZQ bloque LLAVEDER
     (8) asignacion -> . IDENTIFICADOR ASIGNAR expresion
 
-    IDENTIFICADOR   shift and go to state 71
+    IDENTIFICADOR   shift and go to state 74
 
-    asignacion                     shift and go to state 88
+    asignacion                     shift and go to state 94
 
-state 85
+state 91
 
     (24) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER . ELSE LLAVEIZQ bloque LLAVEDER
@@ -2767,23 +3031,24 @@ state 85
     MENOS           reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     PARIAS          reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     INQUIRE         reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
+    CONQUISTAR      reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     IF              reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     PRINT           reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     WHILE           reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     FOR             reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     $end            reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     LLAVEDER        reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
-    ELSE            shift and go to state 89
+    ELSE            shift and go to state 95
 
 
-state 86
+state 92
 
     (29) bloque -> sentencia bloque .
 
     LLAVEDER        reduce using rule 29 (bloque -> sentencia bloque .)
 
 
-state 87
+state 93
 
     (26) ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .
 
@@ -2795,6 +3060,7 @@ state 87
     MENOS           reduce using rule 26 (ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     PARIAS          reduce using rule 26 (ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     INQUIRE         reduce using rule 26 (ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
+    CONQUISTAR      reduce using rule 26 (ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     IF              reduce using rule 26 (ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     PRINT           reduce using rule 26 (ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     WHILE           reduce using rule 26 (ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
@@ -2803,28 +3069,28 @@ state 87
     LLAVEDER        reduce using rule 26 (ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
 
 
-state 88
+state 94
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion . PARDER LLAVEIZQ bloque LLAVEDER
 
-    PARDER          shift and go to state 90
+    PARDER          shift and go to state 96
 
 
-state 89
+state 95
 
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE . LLAVEIZQ bloque LLAVEDER
 
-    LLAVEIZQ        shift and go to state 91
+    LLAVEIZQ        shift and go to state 97
 
 
-state 90
+state 96
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER . LLAVEIZQ bloque LLAVEDER
 
-    LLAVEIZQ        shift and go to state 92
+    LLAVEIZQ        shift and go to state 98
 
 
-state 91
+state 97
 
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ . bloque LLAVEDER
     (28) bloque -> .
@@ -2857,6 +3123,7 @@ state 91
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
     (35) print -> . PRINT PARIZQ expresion PARDER
@@ -2872,20 +3139,21 @@ state 91
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
-    IF              shift and go to state 16
-    PRINT           shift and go to state 17
-    WHILE           shift and go to state 18
-    FOR             shift and go to state 19
+    CONQUISTAR      shift and go to state 16
+    IF              shift and go to state 17
+    PRINT           shift and go to state 18
+    WHILE           shift and go to state 19
+    FOR             shift and go to state 20
 
     expresion                      shift and go to state 4
-    bloque                         shift and go to state 93
-    sentencia                      shift and go to state 82
+    bloque                         shift and go to state 99
+    sentencia                      shift and go to state 88
     asignacion                     shift and go to state 3
     condicional                    shift and go to state 5
     print                          shift and go to state 6
     ciclo                          shift and go to state 7
 
-state 92
+state 98
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ . bloque LLAVEDER
     (28) bloque -> .
@@ -2918,6 +3186,7 @@ state 92
     (34) expresion -> . MENOS expresion
     (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
     (37) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
     (35) print -> . PRINT PARIZQ expresion PARDER
@@ -2933,34 +3202,35 @@ state 92
     MENOS           shift and go to state 13
     PARIAS          shift and go to state 14
     INQUIRE         shift and go to state 15
-    IF              shift and go to state 16
-    PRINT           shift and go to state 17
-    WHILE           shift and go to state 18
-    FOR             shift and go to state 19
+    CONQUISTAR      shift and go to state 16
+    IF              shift and go to state 17
+    PRINT           shift and go to state 18
+    WHILE           shift and go to state 19
+    FOR             shift and go to state 20
 
     asignacion                     shift and go to state 3
     expresion                      shift and go to state 4
-    bloque                         shift and go to state 94
-    sentencia                      shift and go to state 82
+    bloque                         shift and go to state 100
+    sentencia                      shift and go to state 88
     condicional                    shift and go to state 5
     print                          shift and go to state 6
     ciclo                          shift and go to state 7
 
-state 93
+state 99
 
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque . LLAVEDER
 
-    LLAVEDER        shift and go to state 95
+    LLAVEDER        shift and go to state 101
 
 
-state 94
+state 100
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque . LLAVEDER
 
-    LLAVEDER        shift and go to state 96
+    LLAVEDER        shift and go to state 102
 
 
-state 95
+state 101
 
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .
 
@@ -2972,6 +3242,7 @@ state 95
     MENOS           reduce using rule 25 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .)
     PARIAS          reduce using rule 25 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .)
     INQUIRE         reduce using rule 25 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .)
+    CONQUISTAR      reduce using rule 25 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .)
     IF              reduce using rule 25 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .)
     PRINT           reduce using rule 25 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .)
     WHILE           reduce using rule 25 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .)
@@ -2980,7 +3251,7 @@ state 95
     LLAVEDER        reduce using rule 25 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .)
 
 
-state 96
+state 102
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER .
 
@@ -2992,6 +3263,7 @@ state 96
     MENOS           reduce using rule 27 (ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER .)
     PARIAS          reduce using rule 27 (ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER .)
     INQUIRE         reduce using rule 27 (ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER .)
+    CONQUISTAR      reduce using rule 27 (ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER .)
     IF              reduce using rule 27 (ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER .)
     PRINT           reduce using rule 27 (ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER .)
     WHILE           reduce using rule 27 (ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER .)

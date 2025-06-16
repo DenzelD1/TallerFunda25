@@ -18,6 +18,7 @@ tokens = (
     'LLAVEIZQ',
     'LLAVEDER',
     'PUNTOYCOMA',
+    'COMA',
 )
 
 reservadas = {
@@ -36,6 +37,7 @@ reservadas = {
     'menos' : 'MENOS',
     'parias' : 'PARIAS',
     'inquire': 'INQUIRE',
+    'conquistar': 'CONQUISTAR',
 }
 
 tokens = tokens + tuple(reservadas.values())
@@ -54,6 +56,8 @@ t_PARDER = r'\)'
 t_LLAVEIZQ = r'\{'
 t_LLAVEDER = r'\}'
 t_PUNTOYCOMA = r';'
+t_COMA = r','
+
 
 t_ignore = ' \t'
 

@@ -1,3 +1,209 @@
 BlockNode
-    PariasCallNode: parias
-        IdentifierNode: x
+│   PrintNode
+│       LiteralNode: '------------- PRUEBA 1 -------------'
+│   AssignmentNode: devote
+│   │   IdentifierNode: entero
+│       LiteralNode: 100
+│   AssignmentNode: devote
+│   │   IdentifierNode: flotante
+│       LiteralNode: 25.5
+│   AssignmentNode: devote
+│   │   IdentifierNode: cadena
+│       LiteralNode: 'Hola, '
+│   PrintNode
+│       LiteralNode: 'Variable entera:'
+│   PrintNode
+│       IdentifierNode: entero
+│   PrintNode
+│       LiteralNode: 'Variable flotante:'
+│   PrintNode
+│       IdentifierNode: flotante
+│   PrintNode
+│       LiteralNode: 'Variable de cadena:'
+│   PrintNode
+│       IdentifierNode: cadena
+│   AssignmentNode: devote
+│   │   IdentifierNode: suma
+│       BinaryOpNode: inherit
+│       │   IdentifierNode: entero
+│           LiteralNode: 20
+│   AssignmentNode: devote
+│   │   IdentifierNode: resta
+│       BinaryOpNode: plunder
+│       │   IdentifierNode: suma
+│           LiteralNode: 50
+│   AssignmentNode: devote
+│   │   IdentifierNode: multiplicacion
+│       BinaryOpNode: forge
+│       │   IdentifierNode: resta
+│           LiteralNode: 2
+│   AssignmentNode: devote
+│   │   IdentifierNode: division
+│       BinaryOpNode: cleave
+│       │   IdentifierNode: multiplicacion
+│           LiteralNode: 10
+│   AssignmentNode: devote
+│   │   IdentifierNode: modulo
+│       BinaryOpNode: shatter
+│       │   LiteralNode: 10
+│           LiteralNode: 3
+│   PrintNode
+│       LiteralNode: 'Suma (100 + 20):'
+│   PrintNode
+│       IdentifierNode: suma
+│   PrintNode
+│       LiteralNode: 'Resta (120 - 50):'
+│   PrintNode
+│       IdentifierNode: resta
+│   PrintNode
+│       LiteralNode: 'Multiplicacion (70 * 2):'
+│   PrintNode
+│       IdentifierNode: multiplicacion
+│   PrintNode
+│       LiteralNode: 'Division (140 / 10):'
+│   PrintNode
+│       IdentifierNode: division
+│   PrintNode
+│       LiteralNode: 'Modulo (10 % 3):'
+│   PrintNode
+│       IdentifierNode: modulo
+│   AssignmentNode: devote
+│   │   IdentifierNode: negativo
+│       UnaryOpNode: UMINUS
+│           LiteralNode: 5
+│   PrintNode
+│       LiteralNode: 'Numero negativo:'
+│   PrintNode
+│       IdentifierNode: negativo
+│   AssignmentNode: devote
+│   │   IdentifierNode: saludo
+│       BinaryOpNode: UNIR
+│       │   IdentifierNode: cadena
+│           LiteralNode: 'Mundo'
+│   PrintNode
+│       IdentifierNode: saludo
+│   PrintNode
+│       LiteralNode: '------------- PRUEBA 2 -------------'
+│   AssignmentNode: devote
+│   │   IdentifierNode: valorSecreto
+│       LiteralNode: 42
+│   IfNode: judge
+│   │   BinaryOpNode: &&
+│   │   │   BinaryOpNode: ==
+│   │   │   │   IdentifierNode: valorSecreto
+│   │   │       LiteralNode: 42
+│   │       BinaryOpNode: ||
+│   │       │   BinaryOpNode: >
+│   │       │   │   IdentifierNode: suma
+│   │       │       LiteralNode: 100
+│   │           BinaryOpNode: <
+│   │           │   IdentifierNode: resta
+│   │               LiteralNode: 50
+│   │   BlockNode
+│   │       PrintNode
+│   │           LiteralNode: 'Condicion verdadera.'
+│       BlockNode: exile
+│           PrintNode
+│               LiteralNode: 'Condicion falsa.'
+│   IfNode: judge
+│   │   BinaryOpNode: !=
+│   │   │   IdentifierNode: valorSecreto
+│   │       LiteralNode: 42
+│   │   BlockNode
+│   │       PrintNode
+│   │           LiteralNode: 'El valor secreto no es 42.'
+│       BlockNode: exile
+│           PrintNode
+│               LiteralNode: 'El valor secreto no es diferente de 42'
+│   AssignmentNode: devote
+│   │   IdentifierNode: contador
+│       LiteralNode: 3
+│   WhileNode: vigil
+│   │   BinaryOpNode: >
+│   │   │   IdentifierNode: contador
+│   │       LiteralNode: 0
+│       BlockNode
+│       │   PrintNode
+│       │       LiteralNode: 'Contador en:'
+│       │   PrintNode
+│       │       IdentifierNode: contador
+│           AssignmentNode: devote
+│           │   IdentifierNode: contador
+│               BinaryOpNode: plunder
+│               │   IdentifierNode: contador
+│                   LiteralNode: 1
+│   PrintNode
+│       LiteralNode: 'Fin del bucle vigil.'
+│   ForNode: march
+│   │   AssignmentNode: devote
+│   │   │   IdentifierNode: i
+│   │       LiteralNode: 1
+│   │   BinaryOpNode: <=
+│   │   │   IdentifierNode: i
+│   │       LiteralNode: 3
+│   │   AssignmentNode: devote
+│   │   │   IdentifierNode: i
+│   │       BinaryOpNode: inherit
+│   │       │   IdentifierNode: i
+│   │           LiteralNode: 1
+│       BlockNode
+│       │   PrintNode
+│       │       LiteralNode: 'Iteracion del bucle march:'
+│           PrintNode
+│               IdentifierNode: i
+│   PrintNode
+│       LiteralNode: 'Fin del bucle march.'
+│   PrintNode
+│       LiteralNode: '------------- PRUEBA 3 -------------'
+│   AssignmentNode: devote
+│   │   IdentifierNode: nombreUsuario
+│       InputNode: inquire
+│           LiteralNode: 'Ingrese nombre: '
+│   PrintNode
+│       BinaryOpNode: UNIR
+│       │   LiteralNode: 'Bienvenido, '
+│           IdentifierNode: nombreUsuario
+│   AssignmentNode: devote
+│   │   IdentifierNode: edadUsuario
+│       InputNode: inquire
+│           LiteralNode: 'Ingrese edad: '
+│   IfNode: judge
+│   │   BinaryOpNode: >=
+│   │   │   IdentifierNode: edadUsuario
+│   │       LiteralNode: 18
+│   │   BlockNode
+│   │       PrintNode
+│   │           LiteralNode: 'Eres mayor de edad.'
+│       BlockNode: exile
+│           PrintNode
+│               LiteralNode: 'Eres menor de edad.'
+│   PrintNode
+│       LiteralNode: '------------- PRUEBA 4 -------------'
+│   AssignmentNode: devote
+│   │   IdentifierNode: capital
+│       LiteralNode: 1000
+│   PrintNode
+│       LiteralNode: 'Capital inicial:'
+│   PrintNode
+│       IdentifierNode: capital
+│   PariasCallNode: parias
+│       IdentifierNode: capital
+│   PrintNode
+│       LiteralNode: 'Capital despues del impuesto es:'
+│   PrintNode
+│       IdentifierNode: capital
+│   PrintNode
+│       LiteralNode: '------------- PRUEBA 5 -------------'
+│   AssignmentNode: devote
+│   │   IdentifierNode: miEjercito
+│       InputNode: inquire
+│           LiteralNode: '¿Cuántos soldados tienes?: '
+│   AssignmentNode: devote
+│   │   IdentifierNode: resultado
+│       ConquistarCallNode: conquistar
+│       │   LiteralNode: 'Bosque Profundo'
+│           IdentifierNode: miEjercito
+│   PrintNode
+│       LiteralNode: '¿Conquista exitosa?'
+    PrintNode
+        IdentifierNode: resultado

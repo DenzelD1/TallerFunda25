@@ -173,6 +173,48 @@ class InputNode(Node):
                 except ValueError: return user_input
         except Exception as e: raise EvaluationError(f"Error durante la entrada de datos: {e}")
 
+class ConquistarCallNode(Node):
+    def __init__(self, pueblo, ejercito):
+        self.pueblo = pueblo
+        self.ejercito = ejercito
+
+    def get_label(self):
+        return "ConquistarCallNode: conquistar"
+
+    def get_children(self):
+        return [self.pueblo, self.ejercito]
+
+    def evaluate(self, context):
+        pueblo_val = self.pueblo.evaluate(context)
+
+        # Para obtener el nombre de la variable de ejército y su valor actual
+        ejercito_nombre = self.ejercito.name  # si self.ejercito es un nodo de variable
+        ejercito_val = context.get(ejercito_nombre, None)
+
+        if ejercito_val is None:
+            raise EvaluationError(f"Variable '{ejercito_nombre}' no encontrada en el contexto.")
+
+        if not isinstance(ejercito_val, int):
+             raise EvaluationError("Error: El ejército debe ser un número entero.")
+
+        defensa = random.randint(10, 100)
+        print(f"Pueblo '{pueblo_val}' tiene defensa {defensa}. Ejército disponible: {ejercito_val}")
+
+        if ejercito_val > defensa:
+            print(f"¡'{pueblo_val}' ha sido conquistado con éxito!")
+            return True
+        else:
+            perdidas = int(defensa * 0.3)
+            perdidas = min(perdidas, ejercito_val)  # Que no pierdas más soldados de los que tienes
+            nuevo_valor = ejercito_val - perdidas
+            # Actualizamos el valor de la variable del ejército en el contexto
+            for key in context:
+                if context[key] == ejercito_val:
+                    context[key] = nuevo_valor
+                    break
+            print(f"'{pueblo_val}' resistió el ataque. El ejército perdió {perdidas} soldado(s) y ahora tiene {nuevo_valor}.")
+            return False
+
 precedence = (
     ('right', 'ASIGNAR'),
     ('left', 'UNIR'),
@@ -251,6 +293,10 @@ def p_expresion_uminus(p): 'expresion : MENOS expresion %prec MENOS'; p[0] = Una
 def p_print(p): 'print : PRINT PARIZQ expresion PARDER'; p[0] = PrintNode(p[3])
 def p_funcion_parias(p): 'expresion : PARIAS PARIZQ IDENTIFICADOR PARDER'; p[0] = PariasCallNode(p[3])
 def p_expresion_input(p): 'expresion : INQUIRE PARIZQ expresion PARDER'; p[0] = InputNode(p[3])
+def p_funcion_conquistar(p):
+    'expresion : CONQUISTAR PARIZQ expresion COMA expresion PARDER'
+    p[0] = ConquistarCallNode(p[3], p[5])
+
 def p_error(p):
     if p:
         try:

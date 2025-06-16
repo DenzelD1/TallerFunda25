@@ -3,6 +3,7 @@
 ## Integrantes
 
 Denzel Martin Delgado Urquieta, 21.401.250-2, denzel.delgado@alumnos.ucn.cl, ITI.
+
 Darwin Mauricio Tapia Urrutia, 21.599.630-1, darwin.tapia@alumnos.ucn.cl, ITI.
 
 ## Lenguaje Medievo
