@@ -52,7 +52,7 @@ class BinaryOpNode(Node):
             elif self.op == 'shatter': return left_val % right_val
             elif self.op == 'UNIR':
                 if isinstance(left_val, str) and isinstance(right_val, str): return left_val + right_val
-                raise EvaluationError("Error: Operacion invalida entre numero y cadena.")
+                raise EvaluationError("Error: Operacion invalida entre numero y cadena, o entre numeros")
             elif self.op == '>': return left_val > right_val
             elif self.op == '<': return left_val < right_val
             elif self.op == '>=': return left_val >= right_val
@@ -90,13 +90,19 @@ class AssignmentNode(Node):
         context[self.identifier] = value
         return None
 
-class PrintNode(Node):
-    def __init__(self, expr): self.expr = expr
-    def get_label(self): return "PrintNode"
-    def get_children(self): return [self.expr]
+class MultiPrintNode(Node):
+    def __init__(self, expressions):
+        self.expressions = expressions
+    
+    def get_label(self):
+        return "MultiPrintNode"
+    
+    def get_children(self):
+        return self.expressions
+    
     def evaluate(self, context):
-        value = self.expr.evaluate(context)
-        print(value)
+        values_to_print = [str(expr.evaluate(context)) for expr in self.expressions]
+        print("".join(values_to_print))
         return None
 
 class BlockNode(Node):
@@ -187,8 +193,7 @@ class ConquistarCallNode(Node):
     def evaluate(self, context):
         pueblo_val = self.pueblo.evaluate(context)
 
-        # Para obtener el nombre de la variable de ejército y su valor actual
-        ejercito_nombre = self.ejercito.name  # si self.ejercito es un nodo de variable
+        ejercito_nombre = self.ejercito.name 
         ejercito_val = context.get(ejercito_nombre, None)
 
         if ejercito_val is None:
@@ -197,7 +202,7 @@ class ConquistarCallNode(Node):
         if not isinstance(ejercito_val, int):
              raise EvaluationError("Error: El ejército debe ser un número entero.")
 
-        defensa = random.randint(10, 100)
+        defensa = random.randint(10, 20000)
         print(f"Pueblo '{pueblo_val}' tiene defensa {defensa}. Ejército disponible: {ejercito_val}")
 
         if ejercito_val > defensa:
@@ -205,13 +210,9 @@ class ConquistarCallNode(Node):
             return True
         else:
             perdidas = int(defensa * 0.3)
-            perdidas = min(perdidas, ejercito_val)  # Que no pierdas más soldados de los que tienes
+            perdidas = min(perdidas, ejercito_val)
             nuevo_valor = ejercito_val - perdidas
-            # Actualizamos el valor de la variable del ejército en el contexto
-            for key in context:
-                if context[key] == ejercito_val:
-                    context[key] = nuevo_valor
-                    break
+            context[ejercito_nombre] = nuevo_valor 
             print(f"'{pueblo_val}' resistió el ataque. El ejército perdió {perdidas} soldado(s) y ahora tiene {nuevo_valor}.")
             return False
 
@@ -290,12 +291,19 @@ def p_expresion_literal_cadena(p): 'expresion : CADENA'; p[0] = LiteralNode(p[1]
 def p_expresion_numero(p): 'expresion : NUMERO'; p[0] = LiteralNode(p[1])
 def p_expresion_identificador(p): 'expresion : IDENTIFICADOR'; p[0] = IdentifierNode(p[1])
 def p_expresion_uminus(p): 'expresion : MENOS expresion %prec MENOS'; p[0] = UnaryOpNode('UMINUS', p[2])
-def p_print(p): 'print : PRINT PARIZQ expresion PARDER'; p[0] = PrintNode(p[3])
+
+def p_expresiones_list(p):
+    '''expresiones_list : expresion
+                        | expresion COMA expresiones_list'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[3]
+
+def p_print(p): 'print : PRINT PARIZQ expresiones_list PARDER'; p[0] = MultiPrintNode(p[3])
 def p_funcion_parias(p): 'expresion : PARIAS PARIZQ IDENTIFICADOR PARDER'; p[0] = PariasCallNode(p[3])
 def p_expresion_input(p): 'expresion : INQUIRE PARIZQ expresion PARDER'; p[0] = InputNode(p[3])
-def p_funcion_conquistar(p):
-    'expresion : CONQUISTAR PARIZQ expresion COMA expresion PARDER'
-    p[0] = ConquistarCallNode(p[3], p[5])
+def p_funcion_conquistar(p): 'expresion : CONQUISTAR PARIZQ expresion COMA expresion PARDER'; p[0] = ConquistarCallNode(p[3], p[5])
 
 def p_error(p):
     if p:

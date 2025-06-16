@@ -37,26 +37,28 @@ Rule 31    expresion -> CADENA
 Rule 32    expresion -> NUMERO
 Rule 33    expresion -> IDENTIFICADOR
 Rule 34    expresion -> MENOS expresion
-Rule 35    print -> PRINT PARIZQ expresion PARDER
-Rule 36    expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER
-Rule 37    expresion -> INQUIRE PARIZQ expresion PARDER
-Rule 38    expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER
+Rule 35    expresiones_list -> expresion
+Rule 36    expresiones_list -> expresion COMA expresiones_list
+Rule 37    print -> PRINT PARIZQ expresiones_list PARDER
+Rule 38    expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER
+Rule 39    expresion -> INQUIRE PARIZQ expresion PARDER
+Rule 40    expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
 Terminals, with rules where they appear
 
 AND                  : 21
 ASIGNAR              : 8
 CADENA               : 31
-COMA                 : 38
-CONQUISTAR           : 38
+COMA                 : 36 40
+CONQUISTAR           : 40
 DESIGUAL             : 20
 DIVISION             : 13
 ELSE                 : 25
 FOR                  : 27
-IDENTIFICADOR        : 8 33 36
+IDENTIFICADOR        : 8 33 38
 IF                   : 24 25
 IGUAL                : 19
-INQUIRE              : 37
+INQUIRE              : 39
 LLAVEDER             : 24 25 25 26 27
 LLAVEIZQ             : 24 25 25 26 27
 MAYOR                : 15
@@ -69,10 +71,10 @@ MULTIPLICACION       : 12
 NOT                  : 23
 NUMERO               : 32
 OR                   : 22
-PARDER               : 24 25 26 27 30 35 36 37 38
-PARIAS               : 36
-PARIZQ               : 24 25 26 27 30 35 36 37 38
-PRINT                : 35
+PARDER               : 24 25 26 27 30 37 38 39 40
+PARIAS               : 38
+PARIZQ               : 24 25 26 27 30 37 38 39 40
+PRINT                : 37
 PUNTOYCOMA           : 3 4 6 27 27
 RESTA                : 11
 SUMA                 : 10
@@ -86,7 +88,8 @@ asignacion           : 3 27 27
 bloque               : 24 25 25 26 27 29
 ciclo                : 7
 condicional          : 5
-expresion            : 4 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 24 25 26 27 30 34 35 37 38 38
+expresion            : 4 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 24 25 26 27 30 34 35 36 39 40 40
+expresiones_list     : 36 37
 inicio               : 2 0
 print                : 6
 sentencia            : 2 29
@@ -124,12 +127,12 @@ state 0
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
-    (35) print -> . PRINT PARIZQ expresion PARDER
+    (37) print -> . PRINT PARIZQ expresiones_list PARDER
     (26) ciclo -> . WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (27) ciclo -> . FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
 
@@ -193,12 +196,12 @@ state 2
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
-    (35) print -> . PRINT PARIZQ expresion PARDER
+    (37) print -> . PRINT PARIZQ expresiones_list PARDER
     (26) ciclo -> . WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (27) ciclo -> . FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
 
@@ -362,9 +365,9 @@ state 9
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -401,9 +404,9 @@ state 10
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -486,9 +489,9 @@ state 13
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -504,21 +507,21 @@ state 13
 
 state 14
 
-    (36) expresion -> PARIAS . PARIZQ IDENTIFICADOR PARDER
+    (38) expresion -> PARIAS . PARIZQ IDENTIFICADOR PARDER
 
     PARIZQ          shift and go to state 44
 
 
 state 15
 
-    (37) expresion -> INQUIRE . PARIZQ expresion PARDER
+    (39) expresion -> INQUIRE . PARIZQ expresion PARDER
 
     PARIZQ          shift and go to state 45
 
 
 state 16
 
-    (38) expresion -> CONQUISTAR . PARIZQ expresion COMA expresion PARDER
+    (40) expresion -> CONQUISTAR . PARIZQ expresion COMA expresion PARDER
 
     PARIZQ          shift and go to state 46
 
@@ -533,7 +536,7 @@ state 17
 
 state 18
 
-    (35) print -> PRINT . PARIZQ expresion PARDER
+    (37) print -> PRINT . PARIZQ expresiones_list PARDER
 
     PARIZQ          shift and go to state 48
 
@@ -624,9 +627,9 @@ state 24
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -663,9 +666,9 @@ state 25
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -702,9 +705,9 @@ state 26
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -741,9 +744,9 @@ state 27
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -780,9 +783,9 @@ state 28
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -819,9 +822,9 @@ state 29
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -858,9 +861,9 @@ state 30
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -897,9 +900,9 @@ state 31
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -936,9 +939,9 @@ state 32
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -975,9 +978,9 @@ state 33
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1014,9 +1017,9 @@ state 34
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1053,9 +1056,9 @@ state 35
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1092,9 +1095,9 @@ state 36
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1131,9 +1134,9 @@ state 37
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1191,9 +1194,9 @@ state 39
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1371,14 +1374,14 @@ state 43
 
 state 44
 
-    (36) expresion -> PARIAS PARIZQ . IDENTIFICADOR PARDER
+    (38) expresion -> PARIAS PARIZQ . IDENTIFICADOR PARDER
 
     IDENTIFICADOR   shift and go to state 67
 
 
 state 45
 
-    (37) expresion -> INQUIRE PARIZQ . expresion PARDER
+    (39) expresion -> INQUIRE PARIZQ . expresion PARDER
     (9) expresion -> . expresion UNIR expresion
     (10) expresion -> . expresion SUMA expresion
     (11) expresion -> . expresion RESTA expresion
@@ -1399,9 +1402,9 @@ state 45
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1417,7 +1420,7 @@ state 45
 
 state 46
 
-    (38) expresion -> CONQUISTAR PARIZQ . expresion COMA expresion PARDER
+    (40) expresion -> CONQUISTAR PARIZQ . expresion COMA expresion PARDER
     (9) expresion -> . expresion UNIR expresion
     (10) expresion -> . expresion SUMA expresion
     (11) expresion -> . expresion RESTA expresion
@@ -1438,9 +1441,9 @@ state 46
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1478,9 +1481,9 @@ state 47
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1496,7 +1499,9 @@ state 47
 
 state 48
 
-    (35) print -> PRINT PARIZQ . expresion PARDER
+    (37) print -> PRINT PARIZQ . expresiones_list PARDER
+    (35) expresiones_list -> . expresion
+    (36) expresiones_list -> . expresion COMA expresiones_list
     (9) expresion -> . expresion UNIR expresion
     (10) expresion -> . expresion SUMA expresion
     (11) expresion -> . expresion RESTA expresion
@@ -1517,9 +1522,9 @@ state 48
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1531,7 +1536,8 @@ state 48
     INQUIRE         shift and go to state 15
     CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 71
+    expresiones_list               shift and go to state 71
+    expresion                      shift and go to state 72
 
 state 49
 
@@ -1556,9 +1562,9 @@ state 49
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -1570,16 +1576,16 @@ state 49
     INQUIRE         shift and go to state 15
     CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 72
+    expresion                      shift and go to state 73
 
 state 50
 
     (27) ciclo -> FOR PARIZQ . asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
     (8) asignacion -> . IDENTIFICADOR ASIGNAR expresion
 
-    IDENTIFICADOR   shift and go to state 74
+    IDENTIFICADOR   shift and go to state 75
 
-    asignacion                     shift and go to state 73
+    asignacion                     shift and go to state 74
 
 state 51
 
@@ -2370,14 +2376,14 @@ state 66
 
 state 67
 
-    (36) expresion -> PARIAS PARIZQ IDENTIFICADOR . PARDER
+    (38) expresion -> PARIAS PARIZQ IDENTIFICADOR . PARDER
 
-    PARDER          shift and go to state 75
+    PARDER          shift and go to state 76
 
 
 state 68
 
-    (37) expresion -> INQUIRE PARIZQ expresion . PARDER
+    (39) expresion -> INQUIRE PARIZQ expresion . PARDER
     (9) expresion -> expresion . UNIR expresion
     (10) expresion -> expresion . SUMA expresion
     (11) expresion -> expresion . RESTA expresion
@@ -2393,7 +2399,7 @@ state 68
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PARDER          shift and go to state 76
+    PARDER          shift and go to state 77
     UNIR            shift and go to state 24
     SUMA            shift and go to state 25
     RESTA           shift and go to state 26
@@ -2412,7 +2418,7 @@ state 68
 
 state 69
 
-    (38) expresion -> CONQUISTAR PARIZQ expresion . COMA expresion PARDER
+    (40) expresion -> CONQUISTAR PARIZQ expresion . COMA expresion PARDER
     (9) expresion -> expresion . UNIR expresion
     (10) expresion -> expresion . SUMA expresion
     (11) expresion -> expresion . RESTA expresion
@@ -2428,7 +2434,7 @@ state 69
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    COMA            shift and go to state 77
+    COMA            shift and go to state 78
     UNIR            shift and go to state 24
     SUMA            shift and go to state 25
     RESTA           shift and go to state 26
@@ -2464,7 +2470,7 @@ state 70
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PARDER          shift and go to state 78
+    PARDER          shift and go to state 79
     UNIR            shift and go to state 24
     SUMA            shift and go to state 25
     RESTA           shift and go to state 26
@@ -2483,42 +2489,15 @@ state 70
 
 state 71
 
-    (35) print -> PRINT PARIZQ expresion . PARDER
-    (9) expresion -> expresion . UNIR expresion
-    (10) expresion -> expresion . SUMA expresion
-    (11) expresion -> expresion . RESTA expresion
-    (12) expresion -> expresion . MULTIPLICACION expresion
-    (13) expresion -> expresion . DIVISION expresion
-    (14) expresion -> expresion . MODULO expresion
-    (15) expresion -> expresion . MAYOR expresion
-    (16) expresion -> expresion . MENOR expresion
-    (17) expresion -> expresion . MAYORIGUAL expresion
-    (18) expresion -> expresion . MENORIGUAL expresion
-    (19) expresion -> expresion . IGUAL expresion
-    (20) expresion -> expresion . DESIGUAL expresion
-    (21) expresion -> expresion . AND expresion
-    (22) expresion -> expresion . OR expresion
+    (37) print -> PRINT PARIZQ expresiones_list . PARDER
 
-    PARDER          shift and go to state 79
-    UNIR            shift and go to state 24
-    SUMA            shift and go to state 25
-    RESTA           shift and go to state 26
-    MULTIPLICACION  shift and go to state 27
-    DIVISION        shift and go to state 28
-    MODULO          shift and go to state 29
-    MAYOR           shift and go to state 30
-    MENOR           shift and go to state 31
-    MAYORIGUAL      shift and go to state 32
-    MENORIGUAL      shift and go to state 33
-    IGUAL           shift and go to state 34
-    DESIGUAL        shift and go to state 35
-    AND             shift and go to state 36
-    OR              shift and go to state 37
+    PARDER          shift and go to state 80
 
 
 state 72
 
-    (26) ciclo -> WHILE PARIZQ expresion . PARDER LLAVEIZQ bloque LLAVEDER
+    (35) expresiones_list -> expresion .
+    (36) expresiones_list -> expresion . COMA expresiones_list
     (9) expresion -> expresion . UNIR expresion
     (10) expresion -> expresion . SUMA expresion
     (11) expresion -> expresion . RESTA expresion
@@ -2534,7 +2513,8 @@ state 72
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PARDER          shift and go to state 80
+    PARDER          reduce using rule 35 (expresiones_list -> expresion .)
+    COMA            shift and go to state 81
     UNIR            shift and go to state 24
     SUMA            shift and go to state 25
     RESTA           shift and go to state 26
@@ -2553,67 +2533,102 @@ state 72
 
 state 73
 
-    (27) ciclo -> FOR PARIZQ asignacion . PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
+    (26) ciclo -> WHILE PARIZQ expresion . PARDER LLAVEIZQ bloque LLAVEDER
+    (9) expresion -> expresion . UNIR expresion
+    (10) expresion -> expresion . SUMA expresion
+    (11) expresion -> expresion . RESTA expresion
+    (12) expresion -> expresion . MULTIPLICACION expresion
+    (13) expresion -> expresion . DIVISION expresion
+    (14) expresion -> expresion . MODULO expresion
+    (15) expresion -> expresion . MAYOR expresion
+    (16) expresion -> expresion . MENOR expresion
+    (17) expresion -> expresion . MAYORIGUAL expresion
+    (18) expresion -> expresion . MENORIGUAL expresion
+    (19) expresion -> expresion . IGUAL expresion
+    (20) expresion -> expresion . DESIGUAL expresion
+    (21) expresion -> expresion . AND expresion
+    (22) expresion -> expresion . OR expresion
 
-    PUNTOYCOMA      shift and go to state 81
+    PARDER          shift and go to state 82
+    UNIR            shift and go to state 24
+    SUMA            shift and go to state 25
+    RESTA           shift and go to state 26
+    MULTIPLICACION  shift and go to state 27
+    DIVISION        shift and go to state 28
+    MODULO          shift and go to state 29
+    MAYOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAYORIGUAL      shift and go to state 32
+    MENORIGUAL      shift and go to state 33
+    IGUAL           shift and go to state 34
+    DESIGUAL        shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
 
 state 74
+
+    (27) ciclo -> FOR PARIZQ asignacion . PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
+
+    PUNTOYCOMA      shift and go to state 83
+
+
+state 75
 
     (8) asignacion -> IDENTIFICADOR . ASIGNAR expresion
 
     ASIGNAR         shift and go to state 39
 
 
-state 75
-
-    (36) expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .
-
-    PUNTOYCOMA      reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    UNIR            reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    SUMA            reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    RESTA           reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    MULTIPLICACION  reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    DIVISION        reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    MODULO          reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    MAYOR           reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    MENOR           reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    MAYORIGUAL      reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    MENORIGUAL      reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    IGUAL           reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    DESIGUAL        reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    AND             reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    OR              reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    PARDER          reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-    COMA            reduce using rule 36 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
-
-
 state 76
 
-    (37) expresion -> INQUIRE PARIZQ expresion PARDER .
+    (38) expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .
 
-    PUNTOYCOMA      reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    UNIR            reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    SUMA            reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    RESTA           reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    MULTIPLICACION  reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    DIVISION        reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    MODULO          reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    MAYOR           reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    MENOR           reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    MAYORIGUAL      reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    MENORIGUAL      reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    IGUAL           reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    DESIGUAL        reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    AND             reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    OR              reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    PARDER          reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
-    COMA            reduce using rule 37 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    PUNTOYCOMA      reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    UNIR            reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    SUMA            reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    RESTA           reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    MULTIPLICACION  reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    DIVISION        reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    MODULO          reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    MAYOR           reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    MENOR           reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    MAYORIGUAL      reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    MENORIGUAL      reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    IGUAL           reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    DESIGUAL        reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    AND             reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    OR              reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    PARDER          reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
+    COMA            reduce using rule 38 (expresion -> PARIAS PARIZQ IDENTIFICADOR PARDER .)
 
 
 state 77
 
-    (38) expresion -> CONQUISTAR PARIZQ expresion COMA . expresion PARDER
+    (39) expresion -> INQUIRE PARIZQ expresion PARDER .
+
+    PUNTOYCOMA      reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    UNIR            reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    SUMA            reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    RESTA           reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    MULTIPLICACION  reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    DIVISION        reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    MODULO          reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    MAYOR           reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    MENOR           reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    MAYORIGUAL      reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    MENORIGUAL      reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    IGUAL           reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    DESIGUAL        reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    AND             reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    OR              reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    PARDER          reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+    COMA            reduce using rule 39 (expresion -> INQUIRE PARIZQ expresion PARDER .)
+
+
+state 78
+
+    (40) expresion -> CONQUISTAR PARIZQ expresion COMA . expresion PARDER
     (9) expresion -> . expresion UNIR expresion
     (10) expresion -> . expresion SUMA expresion
     (11) expresion -> . expresion RESTA expresion
@@ -2634,9 +2649,9 @@ state 77
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -2648,31 +2663,73 @@ state 77
     INQUIRE         shift and go to state 15
     CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 82
+    expresion                      shift and go to state 84
 
-state 78
+state 79
 
     (24) condicional -> IF PARIZQ expresion PARDER . LLAVEIZQ bloque LLAVEDER
     (25) condicional -> IF PARIZQ expresion PARDER . LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
 
-    LLAVEIZQ        shift and go to state 83
-
-
-state 79
-
-    (35) print -> PRINT PARIZQ expresion PARDER .
-
-    PUNTOYCOMA      reduce using rule 35 (print -> PRINT PARIZQ expresion PARDER .)
+    LLAVEIZQ        shift and go to state 85
 
 
 state 80
 
-    (26) ciclo -> WHILE PARIZQ expresion PARDER . LLAVEIZQ bloque LLAVEDER
+    (37) print -> PRINT PARIZQ expresiones_list PARDER .
 
-    LLAVEIZQ        shift and go to state 84
+    PUNTOYCOMA      reduce using rule 37 (print -> PRINT PARIZQ expresiones_list PARDER .)
 
 
 state 81
+
+    (36) expresiones_list -> expresion COMA . expresiones_list
+    (35) expresiones_list -> . expresion
+    (36) expresiones_list -> . expresion COMA expresiones_list
+    (9) expresion -> . expresion UNIR expresion
+    (10) expresion -> . expresion SUMA expresion
+    (11) expresion -> . expresion RESTA expresion
+    (12) expresion -> . expresion MULTIPLICACION expresion
+    (13) expresion -> . expresion DIVISION expresion
+    (14) expresion -> . expresion MODULO expresion
+    (15) expresion -> . expresion MAYOR expresion
+    (16) expresion -> . expresion MENOR expresion
+    (17) expresion -> . expresion MAYORIGUAL expresion
+    (18) expresion -> . expresion MENORIGUAL expresion
+    (19) expresion -> . expresion IGUAL expresion
+    (20) expresion -> . expresion DESIGUAL expresion
+    (21) expresion -> . expresion AND expresion
+    (22) expresion -> . expresion OR expresion
+    (23) expresion -> . NOT expresion
+    (30) expresion -> . PARIZQ expresion PARDER
+    (31) expresion -> . CADENA
+    (32) expresion -> . NUMERO
+    (33) expresion -> . IDENTIFICADOR
+    (34) expresion -> . MENOS expresion
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+
+    NOT             shift and go to state 9
+    PARIZQ          shift and go to state 10
+    CADENA          shift and go to state 11
+    NUMERO          shift and go to state 12
+    IDENTIFICADOR   shift and go to state 41
+    MENOS           shift and go to state 13
+    PARIAS          shift and go to state 14
+    INQUIRE         shift and go to state 15
+    CONQUISTAR      shift and go to state 16
+
+    expresion                      shift and go to state 72
+    expresiones_list               shift and go to state 86
+
+state 82
+
+    (26) ciclo -> WHILE PARIZQ expresion PARDER . LLAVEIZQ bloque LLAVEDER
+
+    LLAVEIZQ        shift and go to state 87
+
+
+state 83
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA . expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
     (9) expresion -> . expresion UNIR expresion
@@ -2695,9 +2752,9 @@ state 81
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
 
     NOT             shift and go to state 9
     PARIZQ          shift and go to state 10
@@ -2709,11 +2766,11 @@ state 81
     INQUIRE         shift and go to state 15
     CONQUISTAR      shift and go to state 16
 
-    expresion                      shift and go to state 85
+    expresion                      shift and go to state 88
 
-state 82
+state 84
 
-    (38) expresion -> CONQUISTAR PARIZQ expresion COMA expresion . PARDER
+    (40) expresion -> CONQUISTAR PARIZQ expresion COMA expresion . PARDER
     (9) expresion -> expresion . UNIR expresion
     (10) expresion -> expresion . SUMA expresion
     (11) expresion -> expresion . RESTA expresion
@@ -2729,7 +2786,7 @@ state 82
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PARDER          shift and go to state 86
+    PARDER          shift and go to state 89
     UNIR            shift and go to state 24
     SUMA            shift and go to state 25
     RESTA           shift and go to state 26
@@ -2746,7 +2803,7 @@ state 82
     OR              shift and go to state 37
 
 
-state 83
+state 85
 
     (24) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ . bloque LLAVEDER
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ . bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
@@ -2778,12 +2835,12 @@ state 83
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
-    (35) print -> . PRINT PARIZQ expresion PARDER
+    (37) print -> . PRINT PARIZQ expresiones_list PARDER
     (26) ciclo -> . WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (27) ciclo -> . FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
 
@@ -2803,14 +2860,21 @@ state 83
     FOR             shift and go to state 20
 
     expresion                      shift and go to state 4
-    bloque                         shift and go to state 87
-    sentencia                      shift and go to state 88
+    bloque                         shift and go to state 90
+    sentencia                      shift and go to state 91
     asignacion                     shift and go to state 3
     condicional                    shift and go to state 5
     print                          shift and go to state 6
     ciclo                          shift and go to state 7
 
-state 84
+state 86
+
+    (36) expresiones_list -> expresion COMA expresiones_list .
+
+    PARDER          reduce using rule 36 (expresiones_list -> expresion COMA expresiones_list .)
+
+
+state 87
 
     (26) ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ . bloque LLAVEDER
     (28) bloque -> .
@@ -2841,12 +2905,12 @@ state 84
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
-    (35) print -> . PRINT PARIZQ expresion PARDER
+    (37) print -> . PRINT PARIZQ expresiones_list PARDER
     (26) ciclo -> . WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (27) ciclo -> . FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
 
@@ -2866,14 +2930,14 @@ state 84
     FOR             shift and go to state 20
 
     expresion                      shift and go to state 4
-    bloque                         shift and go to state 89
-    sentencia                      shift and go to state 88
+    bloque                         shift and go to state 92
+    sentencia                      shift and go to state 91
     asignacion                     shift and go to state 3
     condicional                    shift and go to state 5
     print                          shift and go to state 6
     ciclo                          shift and go to state 7
 
-state 85
+state 88
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion . PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
     (9) expresion -> expresion . UNIR expresion
@@ -2891,7 +2955,7 @@ state 85
     (21) expresion -> expresion . AND expresion
     (22) expresion -> expresion . OR expresion
 
-    PUNTOYCOMA      shift and go to state 90
+    PUNTOYCOMA      shift and go to state 93
     UNIR            shift and go to state 24
     SUMA            shift and go to state 25
     RESTA           shift and go to state 26
@@ -2908,38 +2972,38 @@ state 85
     OR              shift and go to state 37
 
 
-state 86
+state 89
 
-    (38) expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .
+    (40) expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .
 
-    PUNTOYCOMA      reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    UNIR            reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    SUMA            reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    RESTA           reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    MULTIPLICACION  reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    DIVISION        reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    MODULO          reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    MAYOR           reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    MENOR           reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    MAYORIGUAL      reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    MENORIGUAL      reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    IGUAL           reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    DESIGUAL        reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    AND             reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    OR              reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    PARDER          reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
-    COMA            reduce using rule 38 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    PUNTOYCOMA      reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    UNIR            reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    SUMA            reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    RESTA           reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MULTIPLICACION  reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    DIVISION        reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MODULO          reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MAYOR           reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MENOR           reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MAYORIGUAL      reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    MENORIGUAL      reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    IGUAL           reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    DESIGUAL        reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    AND             reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    OR              reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    PARDER          reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
+    COMA            reduce using rule 40 (expresion -> CONQUISTAR PARIZQ expresion COMA expresion PARDER .)
 
 
-state 87
+state 90
 
     (24) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque . LLAVEDER
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque . LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
 
-    LLAVEDER        shift and go to state 91
+    LLAVEDER        shift and go to state 94
 
 
-state 88
+state 91
 
     (29) bloque -> sentencia . bloque
     (28) bloque -> .
@@ -2970,12 +3034,12 @@ state 88
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
-    (35) print -> . PRINT PARIZQ expresion PARDER
+    (37) print -> . PRINT PARIZQ expresiones_list PARDER
     (26) ciclo -> . WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (27) ciclo -> . FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
 
@@ -2994,31 +3058,31 @@ state 88
     WHILE           shift and go to state 19
     FOR             shift and go to state 20
 
-    sentencia                      shift and go to state 88
-    bloque                         shift and go to state 92
+    sentencia                      shift and go to state 91
+    bloque                         shift and go to state 95
     asignacion                     shift and go to state 3
     expresion                      shift and go to state 4
     condicional                    shift and go to state 5
     print                          shift and go to state 6
     ciclo                          shift and go to state 7
 
-state 89
+state 92
 
     (26) ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque . LLAVEDER
 
-    LLAVEDER        shift and go to state 93
+    LLAVEDER        shift and go to state 96
 
 
-state 90
+state 93
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA . asignacion PARDER LLAVEIZQ bloque LLAVEDER
     (8) asignacion -> . IDENTIFICADOR ASIGNAR expresion
 
-    IDENTIFICADOR   shift and go to state 74
+    IDENTIFICADOR   shift and go to state 75
 
-    asignacion                     shift and go to state 94
+    asignacion                     shift and go to state 97
 
-state 91
+state 94
 
     (24) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER . ELSE LLAVEIZQ bloque LLAVEDER
@@ -3038,17 +3102,17 @@ state 91
     FOR             reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     $end            reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
     LLAVEDER        reduce using rule 24 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
-    ELSE            shift and go to state 95
+    ELSE            shift and go to state 98
 
 
-state 92
+state 95
 
     (29) bloque -> sentencia bloque .
 
     LLAVEDER        reduce using rule 29 (bloque -> sentencia bloque .)
 
 
-state 93
+state 96
 
     (26) ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .
 
@@ -3069,28 +3133,28 @@ state 93
     LLAVEDER        reduce using rule 26 (ciclo -> WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER .)
 
 
-state 94
+state 97
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion . PARDER LLAVEIZQ bloque LLAVEDER
 
-    PARDER          shift and go to state 96
+    PARDER          shift and go to state 99
 
 
-state 95
+state 98
 
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE . LLAVEIZQ bloque LLAVEDER
 
-    LLAVEIZQ        shift and go to state 97
+    LLAVEIZQ        shift and go to state 100
 
 
-state 96
+state 99
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER . LLAVEIZQ bloque LLAVEDER
 
-    LLAVEIZQ        shift and go to state 98
+    LLAVEIZQ        shift and go to state 101
 
 
-state 97
+state 100
 
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ . bloque LLAVEDER
     (28) bloque -> .
@@ -3121,12 +3185,12 @@ state 97
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
-    (35) print -> . PRINT PARIZQ expresion PARDER
+    (37) print -> . PRINT PARIZQ expresiones_list PARDER
     (26) ciclo -> . WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (27) ciclo -> . FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
 
@@ -3146,14 +3210,14 @@ state 97
     FOR             shift and go to state 20
 
     expresion                      shift and go to state 4
-    bloque                         shift and go to state 99
-    sentencia                      shift and go to state 88
+    bloque                         shift and go to state 102
+    sentencia                      shift and go to state 91
     asignacion                     shift and go to state 3
     condicional                    shift and go to state 5
     print                          shift and go to state 6
     ciclo                          shift and go to state 7
 
-state 98
+state 101
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ . bloque LLAVEDER
     (28) bloque -> .
@@ -3184,12 +3248,12 @@ state 98
     (32) expresion -> . NUMERO
     (33) expresion -> . IDENTIFICADOR
     (34) expresion -> . MENOS expresion
-    (36) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
-    (37) expresion -> . INQUIRE PARIZQ expresion PARDER
-    (38) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
+    (38) expresion -> . PARIAS PARIZQ IDENTIFICADOR PARDER
+    (39) expresion -> . INQUIRE PARIZQ expresion PARDER
+    (40) expresion -> . CONQUISTAR PARIZQ expresion COMA expresion PARDER
     (24) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (25) condicional -> . IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER
-    (35) print -> . PRINT PARIZQ expresion PARDER
+    (37) print -> . PRINT PARIZQ expresiones_list PARDER
     (26) ciclo -> . WHILE PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER
     (27) ciclo -> . FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER
 
@@ -3210,27 +3274,27 @@ state 98
 
     asignacion                     shift and go to state 3
     expresion                      shift and go to state 4
-    bloque                         shift and go to state 100
-    sentencia                      shift and go to state 88
+    bloque                         shift and go to state 103
+    sentencia                      shift and go to state 91
     condicional                    shift and go to state 5
     print                          shift and go to state 6
     ciclo                          shift and go to state 7
 
-state 99
+state 102
 
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque . LLAVEDER
 
-    LLAVEDER        shift and go to state 101
+    LLAVEDER        shift and go to state 104
 
 
-state 100
+state 103
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque . LLAVEDER
 
-    LLAVEDER        shift and go to state 102
+    LLAVEDER        shift and go to state 105
 
 
-state 101
+state 104
 
     (25) condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .
 
@@ -3251,7 +3315,7 @@ state 101
     LLAVEDER        reduce using rule 25 (condicional -> IF PARIZQ expresion PARDER LLAVEIZQ bloque LLAVEDER ELSE LLAVEIZQ bloque LLAVEDER .)
 
 
-state 102
+state 105
 
     (27) ciclo -> FOR PARIZQ asignacion PUNTOYCOMA expresion PUNTOYCOMA asignacion PARDER LLAVEIZQ bloque LLAVEDER .
 
