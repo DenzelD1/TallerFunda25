@@ -1,70 +1,3 @@
-# TallerFunda25
-
-## Integrantes
-
-Denzel Martin Delgado Urquieta, 21.401.250-2, denzel.delgado@alumnos.ucn.cl, ITI.
-
-Darwin Mauricio Tapia Urrutia, 21.599.630-1, darwin.tapia@alumnos.ucn.cl, ITI.
-
-## Lenguaje Medievo
-Es un lenguaje de programación que consta en una mezcla del lenguaje C++ y Python con la intencionalidad de agregar caracterizaciones medievales. Asimismo, cuenta con una funcion única relacionada a la edad media llamada "parias", cuyo uso de concepto difiere ligeramente, sin embargo, mantiene el significado mismo del periodo.
-
-## Requisitos previos para el uso
-
-### Linux
-Actualizar el sistema
-```sudo apt update && sudo apt upgrade -y```
-
-Instalar Python3 y PIP
-```sudo apt install python3 python3-pip -y```
-
-Instalar la libreria PLY
-```sudo apt install python3-ply```
-
-### Windows
-Instalar Python 3 en python.org
-
-Instalar la libreria PLY
-```pip install ply```
-
-## Como ejecutar en entorno Linux o Windows
-
-### Linux
-
-#### Modo Archivo
-```python3 test_parser.py <programa_ejecutable>.txt```
-
-#### Modo Interactivo
-```python3 test_parser.py```
-
-### Windows
-
-### Modo Archivo
-```python test_parser.py <programa_ejecutable>.txt```
-
-### Modo Interactivo
-```python test_parser.py```
-
-## Diccionario (Tenga en cuenta que algunos deben de llevar ';')
-```
--> + = inherit
--> - = plunder
--> * = forge
--> / = cleave
--> % = shatter
--> asignacion de variable(=) = devote
--> if = judge
--> else = exile
--> for = march
--> while = vigil
--> print = print
--> concatenar = unir
--> negativo (numero) = menos
--> input() = inquire()
--> funcion personalizada = parias(variable)
-```
-## Ejemplos de codigo (actualmente en prueba.txt)
-```
 // CODIGO PARA PROBAR
 
 entero devote 100;
@@ -151,4 +84,3 @@ miEjercito devote inquire("¿Cuántos soldados tienes?: ");
 resultado devote conquistar("Bosque Profundo", miEjercito);
 print("¿Conquista exitosa?");
 print(resultado);
-```
