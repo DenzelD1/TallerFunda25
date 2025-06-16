@@ -1,7 +1,34 @@
 BlockNode
+│   FunctionDefNode: decree imprimirSuma(num1, num2)
+│       BlockNode
+│       │   AssignmentNode: devote
+│       │   │   IdentifierNode: res
+│       │       BinaryOpNode: inherit
+│       │       │   IdentifierNode: num1
+│       │           IdentifierNode: num2
+│           MultiPrintNode
+│           │   LiteralNode: 'La suma es: '
+│               IdentifierNode: res
+│   FunctionCallNode: imprimirSuma
+│   │   LiteralNode: 5
+│       LiteralNode: 3
+│   FunctionDefNode: decree cambiar(entero)
+│       BlockNode
+│       │   AssignmentNode: devote
+│       │   │   IdentifierNode: resta
+│       │       BinaryOpNode: plunder
+│       │       │   IdentifierNode: entero
+│       │           LiteralNode: 10
+│           ReturnNode: yield
+│               IdentifierNode: resta
 │   AssignmentNode: devote
-│   │   IdentifierNode: ejercito
-│       LiteralNode: 10
-    ConquistarCallNode: conquistar
-    │   LiteralNode: 'Valencia'
-        IdentifierNode: ejercito
+│   │   IdentifierNode: num
+│       LiteralNode: 20
+│   MultiPrintNode
+│       IdentifierNode: num
+│   AssignmentNode: devote
+│   │   IdentifierNode: num
+│       FunctionCallNode: cambiar
+│           IdentifierNode: num
+    MultiPrintNode
+        IdentifierNode: num

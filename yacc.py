@@ -5,6 +5,10 @@ from lexer import tokens
 class EvaluationError(Exception):
     pass
 
+class ReturnValue(Exception):
+    def __init__(self, value):
+        self.value = value
+
 def format_ast_as_tree(node, prefix=""):
     if not isinstance(node, Node): return str(node)
     children = node.get_children()
@@ -19,28 +23,29 @@ def format_ast_as_tree(node, prefix=""):
 class Node:
     def get_label(self): return self.__class__.__name__
     def get_children(self): return []
-    def evaluate(self, context): raise NotImplementedError("Evaluate no implementado")
+    def evaluate(self, context_stack): raise NotImplementedError("Evaluate no implementado")
 
 class LiteralNode(Node):
     def __init__(self, value): self.value = value
     def get_label(self): return f"LiteralNode: {repr(self.value)}"
-    def evaluate(self, context): return self.value
+    def evaluate(self, context_stack): return self.value
 
 class IdentifierNode(Node):
     def __init__(self, name): self.name = name
     def get_label(self): return f"IdentifierNode: {self.name}"
-    def evaluate(self, context):
-        if self.name in context:
-            return context[self.name]
+    def evaluate(self, context_stack):
+        for context in reversed(context_stack):
+            if self.name in context:
+                return context[self.name]
         raise EvaluationError(f"Error: Variable '{self.name}' no definida.")
 
 class BinaryOpNode(Node):
     def __init__(self, left, op, right): self.left, self.op, self.right = left, op, right
     def get_label(self): return f"BinaryOpNode: {self.op}"
     def get_children(self): return [self.left, self.right]
-    def evaluate(self, context):
-        left_val = self.left.evaluate(context)
-        right_val = self.right.evaluate(context)
+    def evaluate(self, context_stack):
+        left_val = self.left.evaluate(context_stack)
+        right_val = self.right.evaluate(context_stack)
         try:
             if self.op == 'inherit': return left_val + right_val
             elif self.op == 'plunder': return left_val - right_val
@@ -52,7 +57,7 @@ class BinaryOpNode(Node):
             elif self.op == 'shatter': return left_val % right_val
             elif self.op == 'UNIR':
                 if isinstance(left_val, str) and isinstance(right_val, str): return left_val + right_val
-                raise EvaluationError("Error: Operacion invalida entre numero y cadena, o entre numeros")
+                raise EvaluationError("Error: Operacion 'UNIR' solo permitida entre cadenas.")
             elif self.op == '>': return left_val > right_val
             elif self.op == '<': return left_val < right_val
             elif self.op == '>=': return left_val >= right_val
@@ -70,8 +75,8 @@ class UnaryOpNode(Node):
     def __init__(self, op, expr): self.op, self.expr = op, expr
     def get_label(self): return f"UnaryOpNode: {self.op}"
     def get_children(self): return [self.expr]
-    def evaluate(self, context):
-        val = self.expr.evaluate(context)
+    def evaluate(self, context_stack):
+        val = self.expr.evaluate(context_stack)
         if self.op == 'NOT' or self.op == '!': return not val
         elif self.op == 'UMINUS':
             try:
@@ -85,9 +90,9 @@ class AssignmentNode(Node):
     def __init__(self, identifier, expr): self.identifier, self.expr = identifier, expr
     def get_label(self): return "AssignmentNode: devote"
     def get_children(self): return [IdentifierNode(self.identifier), self.expr]
-    def evaluate(self, context):
-        value = self.expr.evaluate(context)
-        context[self.identifier] = value
+    def evaluate(self, context_stack):
+        value = self.expr.evaluate(context_stack)
+        context_stack[-1][self.identifier] = value
         return None
 
 class MultiPrintNode(Node):
@@ -100,8 +105,8 @@ class MultiPrintNode(Node):
     def get_children(self):
         return self.expressions
     
-    def evaluate(self, context):
-        values_to_print = [str(expr.evaluate(context)) for expr in self.expressions]
+    def evaluate(self, context_stack):
+        values_to_print = [str(expr.evaluate(context_stack)) for expr in self.expressions]
         print("".join(values_to_print))
         return None
 
@@ -109,9 +114,9 @@ class BlockNode(Node):
     def __init__(self, statements): self.statements = statements
     def get_label(self): return getattr(self, 'custom_label', 'BlockNode')
     def get_children(self): return self.statements
-    def evaluate(self, context):
+    def evaluate(self, context_stack):
         for stmt in self.statements:
-            stmt.evaluate(context)
+            stmt.evaluate(context_stack)
         return None
         
 class IfNode(Node):
@@ -124,17 +129,17 @@ class IfNode(Node):
             self.false_block.custom_label = "BlockNode: exile"
             children.append(self.false_block)
         return children
-    def evaluate(self, context):
-        if self.condition.evaluate(context): self.true_block.evaluate(context)
-        elif self.false_block: self.false_block.evaluate(context)
+    def evaluate(self, context_stack):
+        if self.condition.evaluate(context_stack): self.true_block.evaluate(context_stack)
+        elif self.false_block: self.false_block.evaluate(context_stack)
         return None
 
 class WhileNode(Node):
     def __init__(self, condition, block): self.condition, self.block = condition, block
     def get_label(self): return "WhileNode: vigil"
     def get_children(self): return [self.condition, self.block]
-    def evaluate(self, context):
-        while self.condition.evaluate(context): self.block.evaluate(context)
+    def evaluate(self, context_stack):
+        while self.condition.evaluate(context_stack): self.block.evaluate(context_stack)
         return None
 
 class ForNode(Node):
@@ -142,26 +147,26 @@ class ForNode(Node):
         self.init, self.condition, self.update, self.block = init, condition, update, block
     def get_label(self): return "ForNode: march"
     def get_children(self): return [self.init, self.condition, self.update, self.block]
-    def evaluate(self, context):
-        self.init.evaluate(context)
-        while self.condition.evaluate(context):
-            self.block.evaluate(context)
-            self.update.evaluate(context)
+    def evaluate(self, context_stack):
+        self.init.evaluate(context_stack)
+        while self.condition.evaluate(context_stack):
+            self.block.evaluate(context_stack)
+            self.update.evaluate(context_stack)
         return None
 
 class PariasCallNode(Node):
     def __init__(self, identifier): self.identifier = identifier
     def get_label(self): return "PariasCallNode: parias"
     def get_children(self): return [IdentifierNode(self.identifier)]
-    def evaluate(self, context):
-        old_value = self.get_children()[0].evaluate(context)
+    def evaluate(self, context_stack):
+        old_value = self.get_children()[0].evaluate(context_stack)
         if not isinstance(old_value, (int, float)):
             raise EvaluationError(f"Error: La variable para 'parias' debe ser numerica.")
         impuesto = random.randint(1, 100)
         print(f"Impuesto: '{impuesto}'%")
         sobrante = 100 - impuesto
         new_value = (old_value * sobrante) / 100
-        context[self.identifier] = new_value
+        context_stack[-1][self.identifier] = new_value
         print(f"Valor de entrada: {old_value}, Valor final: {new_value}")
         return new_value
 
@@ -169,8 +174,8 @@ class InputNode(Node):
     def __init__(self, prompt_expr): self.prompt_expr = prompt_expr
     def get_label(self): return "InputNode: inquire"
     def get_children(self): return [self.prompt_expr]
-    def evaluate(self, context):
-        prompt = self.prompt_expr.evaluate(context)
+    def evaluate(self, context_stack):
+        prompt = self.prompt_expr.evaluate(context_stack)
         try:
             user_input = input(prompt)
             try: return int(user_input)
@@ -190,14 +195,21 @@ class ConquistarCallNode(Node):
     def get_children(self):
         return [self.pueblo, self.ejercito]
 
-    def evaluate(self, context):
-        pueblo_val = self.pueblo.evaluate(context)
+    def evaluate(self, context_stack):
+        pueblo_val = self.pueblo.evaluate(context_stack)
 
         ejercito_nombre = self.ejercito.name 
-        ejercito_val = context.get(ejercito_nombre, None)
+        ejercito_val = context_stack[-1].get(ejercito_nombre, None)
 
         if ejercito_val is None:
-            raise EvaluationError(f"Variable '{ejercito_nombre}' no encontrada en el contexto.")
+            found = False
+            for context in reversed(context_stack):
+                if ejercito_nombre in context:
+                    ejercito_val = context[ejercito_nombre]
+                    found = True
+                    break
+            if not found:
+                raise EvaluationError(f"Variable '{ejercito_nombre}' no encontrada en el contexto.")
 
         if not isinstance(ejercito_val, int):
              raise EvaluationError("Error: El ejército debe ser un número entero.")
@@ -212,9 +224,84 @@ class ConquistarCallNode(Node):
             perdidas = int(defensa * 0.3)
             perdidas = min(perdidas, ejercito_val)
             nuevo_valor = ejercito_val - perdidas
-            context[ejercito_nombre] = nuevo_valor 
+            for context in reversed(context_stack):
+                if ejercito_nombre in context:
+                    context[ejercito_nombre] = nuevo_valor
+                    break
             print(f"'{pueblo_val}' resistió el ataque. El ejército perdió {perdidas} soldado(s) y ahora tiene {nuevo_valor}.")
             return False
+
+class FunctionDefNode(Node):
+    def __init__(self, name, params, body):
+        self.name = name
+        self.params = params 
+        self.body = body     
+    
+    def get_label(self):
+        return f"FunctionDefNode: decree {self.name}({', '.join(self.params)})"
+    
+    def get_children(self):
+        return [self.body]
+
+    def evaluate(self, context_stack):
+        context_stack[0][self.name] = self
+        return None
+
+class FunctionCallNode(Node):
+    def __init__(self, name, args):
+        self.name = name
+        self.args = args 
+    
+    def get_label(self):
+        return f"FunctionCallNode: {self.name}"
+    
+    def get_children(self):
+        return self.args
+
+    def evaluate(self, context_stack):
+        func_def = None
+        for context in reversed(context_stack):
+            if self.name in context and isinstance(context[self.name], FunctionDefNode):
+                func_def = context[self.name]
+                break
+        
+        if not func_def:
+            raise EvaluationError(f"Error: Funcion '{self.name}' no definida.")
+
+        if len(self.args) != len(func_def.params):
+            raise EvaluationError(f"Error: Funcion '{self.name}' espera {len(func_def.params)} argumentos, pero recibió {len(self.args)}.")
+
+        new_context = {}
+        for param_name, arg_expr in zip(func_def.params, self.args):
+            new_context[param_name] = arg_expr.evaluate(context_stack) 
+
+        context_stack.append(new_context)
+
+        return_value = None
+        try:
+            func_def.body.evaluate(context_stack) 
+        except ReturnValue as r:
+            return_value = r.value 
+        finally:
+            context_stack.pop() 
+
+        return return_value
+
+class ReturnNode(Node):
+    def __init__(self, expr=None):
+        self.expr = expr
+    
+    def get_label(self):
+        return "ReturnNode: yield"
+    
+    def get_children(self):
+        return [self.expr] if self.expr else []
+
+    def evaluate(self, context_stack):
+        value = None
+        if self.expr:
+            value = self.expr.evaluate(context_stack)
+        raise ReturnValue(value)
 
 precedence = (
     ('right', 'ASIGNAR'),
@@ -231,7 +318,8 @@ precedence = (
 
 def p_inicio(p):
     '''inicio : 
-              | sentencia inicio'''
+              | sentencia inicio
+              | declaracion_funcion inicio''' 
     if len(p) == 1:
         p[0] = BlockNode([])
     else:
@@ -244,8 +332,37 @@ def p_sentencia(p):
                    | expresion PUNTOYCOMA
                    | condicional
                    | print PUNTOYCOMA
-                   | ciclo'''
+                   | ciclo
+                   | sentencia_yield''' 
     p[0] = p[1]
+
+def p_declaracion_funcion(p):
+    '''declaracion_funcion : DECREE IDENTIFICADOR PARIZQ parametros_opcionales PARDER LLAVEIZQ bloque LLAVEDER'''
+    p[0] = FunctionDefNode(p[2], p[4], p[7])
+
+def p_parametros_opcionales(p):
+    '''parametros_opcionales : 
+                             | parametros_list'''
+    if len(p) == 1:
+        p[0] = []
+    else:
+        p[0] = p[1]
+
+def p_parametros_list(p):
+    '''parametros_list : IDENTIFICADOR
+                       | IDENTIFICADOR COMA parametros_list'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[3]
+
+def p_sentencia_yield(p):
+    '''sentencia_yield : YIELD expresion PUNTOYCOMA
+                       | YIELD PUNTOYCOMA'''
+    if len(p) == 3:
+        p[0] = ReturnNode(None)
+    else:
+        p[0] = ReturnNode(p[2])
 
 def p_asignacion(p): 'asignacion : IDENTIFICADOR ASIGNAR expresion'; p[0] = AssignmentNode(p[1], p[3])
 def p_expresion_unir(p): 'expresion : expresion UNIR expresion'; p[0] = BinaryOpNode(p[1], 'UNIR', p[3])
@@ -300,10 +417,23 @@ def p_expresiones_list(p):
     else:
         p[0] = [p[1]] + p[3]
 
+def p_argumentos_opcionales(p):
+    '''argumentos_opcionales : 
+                             | expresiones_list'''
+    if len(p) == 1:
+        p[0] = []
+    else:
+        p[0] = p[1]
+
 def p_print(p): 'print : PRINT PARIZQ expresiones_list PARDER'; p[0] = MultiPrintNode(p[3])
 def p_funcion_parias(p): 'expresion : PARIAS PARIZQ IDENTIFICADOR PARDER'; p[0] = PariasCallNode(p[3])
 def p_expresion_input(p): 'expresion : INQUIRE PARIZQ expresion PARDER'; p[0] = InputNode(p[3])
 def p_funcion_conquistar(p): 'expresion : CONQUISTAR PARIZQ expresion COMA expresion PARDER'; p[0] = ConquistarCallNode(p[3], p[5])
+
+def p_expresion_llamada_funcion(p):
+    '''expresion : IDENTIFICADOR PARIZQ argumentos_opcionales PARDER'''
+    p[0] = FunctionCallNode(p[1], p[3])
+
 
 def p_error(p):
     if p:

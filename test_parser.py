@@ -1,8 +1,8 @@
 import sys
 from lexer import lexer
-from yacc import parser, format_ast_as_tree, EvaluationError
+from yacc import parser, format_ast_as_tree, EvaluationError, ReturnValue
 
-def process_code(code, context):
+def process_code(code, context_stack): # Ahora recibe una pila de contextos
     print("\nIniciando analisis lexico...")
     lexer.input(code)
     cloned_lexer = lexer.clone() 
@@ -30,9 +30,11 @@ def process_code(code, context):
 
         print("\n--- EJECUCION DEL PROGRAMA ---")
         try:
-            ast.evaluate(context)
+            ast.evaluate(context_stack) # Pasar la pila de contextos
         except EvaluationError as e:
-            print(e)  
+            print(e)
+        except ReturnValue as r: # Si se retorna un valor de nivel superior
+            print(f"Advertencia: 'yield' en el contexto global con valor: {r.value}")
         
         print("--- FIN DE LA EJECUCION ---\n")
         
@@ -61,14 +63,15 @@ def run_interactive_mode():
 
     while True:
         try:
-            context = {}
+            global_context = {}
+            context_stack = [global_context]
             print("\n>>> Escriba su codigo aqui <<<")
             input_code = sys.stdin.read()
             
             if not input_code.strip():
                 continue
 
-            process_code(input_code, context)
+            process_code(input_code, context_stack)
 
         except KeyboardInterrupt:
             print("\nSaliendo de la terminal interactiva")
@@ -82,8 +85,10 @@ def run_file_mode(file_path):
         with open(file_path, "r", encoding="utf-8") as file:
             code = file.read()
         
-        context = {} 
-        process_code(code, context)
+        # Inicializar la pila de contextos con el contexto global
+        global_context = {}
+        context_stack = [global_context] 
+        process_code(code, context_stack)
 
     except FileNotFoundError:
         print(f"Error: El archivo '{file_path}' no fue encontrado")

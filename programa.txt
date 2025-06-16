@@ -1,91 +1,16 @@
-// CODIGO PARA PROBAR
-
-print("------------- PRUEBA 1 -------------");
-entero devote 100;
-flotante devote 25.5;
-cadena devote "Hola, ";
-
-print("Variable entera:");
-print(entero);
-print("Variable flotante:");
-print(flotante);
-print("Variable de cadena:");
-print(cadena);
-
-suma devote entero inherit 20; 
-resta devote suma plunder 50; 
-multiplicacion devote resta forge 2; 
-division devote multiplicacion cleave 10; 
-modulo devote 10 shatter 3;
-
-print("Suma (100 + 20):");
-print(suma);
-print("Resta (120 - 50):");
-print(resta);
-print("Multiplicacion (70 * 2):");
-print(multiplicacion);
-print("Division (140 / 10):");
-print(division);
-print("Modulo (10 % 3):");
-print(modulo);
-
-negativo devote menos 5;
-print("Numero negativo:");
-print(negativo);
-
-
-saludo devote cadena unir "Mundo";
-print(saludo);
-
-print("------------- PRUEBA 2 -------------");
-valorSecreto devote 42;
-judge (valorSecreto == 42 && (suma > 100 || resta < 50)) {
-    print("Condicion verdadera.");
-} exile {
-    print("Condicion falsa.");
+decree imprimirSuma(num1, num2) {
+    res devote num1 inherit num2;
+    print("La suma es: ", res);
 }
 
-judge (valorSecreto != 42) {
-    print("El valor secreto no es 42.");
-} exile {
-    print("El valor secreto no es diferente de 42");
+imprimirSuma(5, 3);
+
+decree cambiar(entero) {
+    resta devote entero plunder 10;
+    yield resta;
 }
 
-contador devote 3;
-vigil (contador > 0) {
-    print("Contador en:");
-    print(contador);
-    contador devote contador plunder 1;
-}
-print("Fin del bucle vigil.");
-
-march (i devote 1; i <= 3; i devote i inherit 1) {
-    print("Iteracion del bucle march:");
-    print(i);
-}
-print("Fin del bucle march.");
-
-print("------------- PRUEBA 3 -------------");
-nombreUsuario devote inquire("Ingrese nombre: ");
-print("Bienvenido, " unir nombreUsuario);
-edadUsuario devote inquire("Ingrese edad: ");
-
-judge(edadUsuario >= 18) {
-    print("Eres mayor de edad.");
-} exile {
-    print("Eres menor de edad.");
-}
-
-print("------------- PRUEBA 4 -------------");
-capital devote 1000;
-print("Capital inicial:");
-print(capital);
-parias(capital);
-print("Capital despues del impuesto es:");
-print(capital);
-
-print("------------- PRUEBA 5 -------------");
-miEjercito devote inquire("¿Cuántos soldados tienes?: ");
-resultado devote conquistar("Bosque Profundo", miEjercito);
-print("¿Conquista exitosa?");
-print(resultado);
+num devote 20;
+print(num);
+num devote cambiar(num);
+print(num);

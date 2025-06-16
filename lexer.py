@@ -38,6 +38,8 @@ reservadas = {
     'parias' : 'PARIAS',
     'inquire': 'INQUIRE',
     'conquistar': 'CONQUISTAR',
+    'decree': 'DECREE',
+    'yield': 'YIELD',
 }
 
 tokens = tokens + tuple(reservadas.values())
