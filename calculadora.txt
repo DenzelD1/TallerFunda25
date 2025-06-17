@@ -1,0 +1,115 @@
+decree suma(a, b) {
+    resultado devote a inherit b;
+    yield resultado;
+}
+
+decree resta(a, b) {
+    resultado devote a plunder b;
+    yield resultado;
+}
+
+decree multiplicacion(a, b) {
+    resultado devote a forge b;
+    yield resultado;
+}
+
+decree division(a, b) {
+    resultado devote a cleave b;
+    yield resultado;
+}
+
+decree potencia(base, exponente) {
+    judge(exponente < 0) {
+        print("Solo se permiten numeros enteros positivos");
+        yield;
+    } exile {
+        judge(exponente == 0) {
+            yield 1;
+        } exile {
+            judge(exponente shatter 1 != 0) {
+                print("No se permiten exponentes decimales");
+                yield;
+            }
+        }
+    }
+    res devote base;
+    contador devote exponente;
+    vigil(contador > 1) {
+        contador devote resta(contador, 1);
+        res devote multiplicacion(res, base);
+    }
+    yield res;
+}
+
+opcion devote 0; // Variable para almacenar la opción del usuario
+num1 devote 0;   // Primer número de entrada
+num2 devote 0;   // Segundo número de entrada
+
+print("============================");
+print("CALCULADORA BASICA");
+print("============================");
+
+vigil(opcion != 6) {
+    print("1. Sumar");
+    print("2. Restar");
+    print("3. Multiplicar");
+    print("4. Dividir");
+    print("5. Potencia");
+    print("6. Salir");
+    print("Elija una opcion: ");
+    opcion devote inquire("");
+
+    judge(opcion == 1) {
+        print("Ingrese el primer numero: ");
+        num1 devote inquire("");
+        print("Ingrese el segundo numero: ");
+        num2 devote inquire("");
+        res devote suma(num1, num2);
+        print("Suma: ", res);
+    } exile {
+        judge(opcion == 2) {
+            print("Ingrese el primer numero: ");
+            num1 devote inquire("");
+            print("Ingrese el segundo numero: ");
+            num2 devote inquire("");
+            res devote resta(num1, num2);
+            print("Resta: ", res);
+        } exile {
+            judge(opcion == 3) {
+                print("Ingrese el primer numero: ");
+                num1 devote inquire("");
+                print("Ingrese el segundo numero: ");
+                num2 devote inquire("");
+                res devote multiplicacion(num1, num2);
+                print("Multiplicacion: ", res);
+            } exile {
+                judge(opcion == 4) {
+                    print("Ingrese el primer numero: ");
+                    num1 devote inquire("");
+                    print("Ingrese el segundo numero: ");
+                    num2 devote inquire("");
+                    res devote division(num1, num2);
+                    print("Division: ", res);
+                } exile {
+                    judge(opcion == 5) {
+                        print("Ingrese la base: ");
+                        num1 devote inquire("");
+                        print("Ingrese el exponente: ");
+                        num2 devote inquire("");
+                        res devote potencia(num1, num2);
+                        print("Potencia: ", res);
+                    } exile {
+                        judge(opcion == 6) {
+                            print("Saliendo de la calculadora. Adios");
+                        } exile {
+                            print("Opcion no valida. Intente de nuevo");
+                        }
+                    }
+                }
+            }
+        }
+    }
+    print("============================"); // Separador entre operaciones
+}
+
+

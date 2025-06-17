@@ -2,7 +2,7 @@ import sys
 from lexer import lexer
 from yacc import parser, format_ast_as_tree, EvaluationError, ReturnValue
 
-def process_code(code, context_stack): # Ahora recibe una pila de contextos
+def process_code(code, context_stack): 
     print("\nIniciando analisis lexico...")
     lexer.input(code)
     cloned_lexer = lexer.clone() 
@@ -30,10 +30,10 @@ def process_code(code, context_stack): # Ahora recibe una pila de contextos
 
         print("\n--- EJECUCION DEL PROGRAMA ---")
         try:
-            ast.evaluate(context_stack) # Pasar la pila de contextos
+            ast.evaluate(context_stack)
         except EvaluationError as e:
             print(e)
-        except ReturnValue as r: # Si se retorna un valor de nivel superior
+        except ReturnValue as r:
             print(f"Advertencia: 'yield' en el contexto global con valor: {r.value}")
         
         print("--- FIN DE LA EJECUCION ---\n")
@@ -85,7 +85,6 @@ def run_file_mode(file_path):
         with open(file_path, "r", encoding="utf-8") as file:
             code = file.read()
         
-        # Inicializar la pila de contextos con el contexto global
         global_context = {}
         context_stack = [global_context] 
         process_code(code, context_stack)

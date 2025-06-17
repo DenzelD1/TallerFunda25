@@ -1,34 +1,269 @@
 BlockNode
-│   FunctionDefNode: decree imprimirSuma(num1, num2)
+│   FunctionDefNode: decree suma(a, b)
 │       BlockNode
+│       │   AssignmentNode: devote
+│       │   │   IdentifierNode: resultado
+│       │       BinaryOpNode: inherit
+│       │       │   IdentifierNode: a
+│       │           IdentifierNode: b
+│           ReturnNode: yield
+│               IdentifierNode: resultado
+│   FunctionDefNode: decree resta(a, b)
+│       BlockNode
+│       │   AssignmentNode: devote
+│       │   │   IdentifierNode: resultado
+│       │       BinaryOpNode: plunder
+│       │       │   IdentifierNode: a
+│       │           IdentifierNode: b
+│           ReturnNode: yield
+│               IdentifierNode: resultado
+│   FunctionDefNode: decree multiplicacion(a, b)
+│       BlockNode
+│       │   AssignmentNode: devote
+│       │   │   IdentifierNode: resultado
+│       │       BinaryOpNode: forge
+│       │       │   IdentifierNode: a
+│       │           IdentifierNode: b
+│           ReturnNode: yield
+│               IdentifierNode: resultado
+│   FunctionDefNode: decree division(a, b)
+│       BlockNode
+│       │   AssignmentNode: devote
+│       │   │   IdentifierNode: resultado
+│       │       BinaryOpNode: cleave
+│       │       │   IdentifierNode: a
+│       │           IdentifierNode: b
+│           ReturnNode: yield
+│               IdentifierNode: resultado
+│   FunctionDefNode: decree potencia(base, exponente)
+│       BlockNode
+│       │   IfNode: judge
+│       │   │   BinaryOpNode: <
+│       │   │   │   IdentifierNode: exponente
+│       │   │       LiteralNode: 0
+│       │   │   BlockNode
+│       │   │   │   MultiPrintNode
+│       │   │   │       LiteralNode: 'Solo se permiten numeros enteros positivos'
+│       │   │       ReturnNode: yield
+│       │       BlockNode: exile
+│       │           IfNode: judge
+│       │           │   BinaryOpNode: ==
+│       │           │   │   IdentifierNode: exponente
+│       │           │       LiteralNode: 0
+│       │           │   BlockNode
+│       │           │       ReturnNode: yield
+│       │           │           LiteralNode: 1
+│       │               BlockNode: exile
+│       │                   IfNode: judge
+│       │                   │   BinaryOpNode: !=
+│       │                   │   │   BinaryOpNode: shatter
+│       │                   │   │   │   IdentifierNode: exponente
+│       │                   │   │       LiteralNode: 1
+│       │                   │       LiteralNode: 0
+│       │                       BlockNode
+│       │                       │   MultiPrintNode
+│       │                       │       LiteralNode: 'No se permiten exponentes decimales'
+│       │                           ReturnNode: yield
 │       │   AssignmentNode: devote
 │       │   │   IdentifierNode: res
-│       │       BinaryOpNode: inherit
-│       │       │   IdentifierNode: num1
-│       │           IdentifierNode: num2
-│           MultiPrintNode
-│           │   LiteralNode: 'La suma es: '
-│               IdentifierNode: res
-│   FunctionCallNode: imprimirSuma
-│   │   LiteralNode: 5
-│       LiteralNode: 3
-│   FunctionDefNode: decree cambiar(entero)
-│       BlockNode
+│       │       IdentifierNode: base
 │       │   AssignmentNode: devote
-│       │   │   IdentifierNode: resta
-│       │       BinaryOpNode: plunder
-│       │       │   IdentifierNode: entero
-│       │           LiteralNode: 10
+│       │   │   IdentifierNode: contador
+│       │       IdentifierNode: exponente
+│       │   WhileNode: vigil
+│       │   │   BinaryOpNode: >
+│       │   │   │   IdentifierNode: contador
+│       │   │       LiteralNode: 1
+│       │       BlockNode
+│       │       │   AssignmentNode: devote
+│       │       │   │   IdentifierNode: contador
+│       │       │       FunctionCallNode: resta
+│       │       │       │   IdentifierNode: contador
+│       │       │           LiteralNode: 1
+│       │           AssignmentNode: devote
+│       │           │   IdentifierNode: res
+│       │               FunctionCallNode: multiplicacion
+│       │               │   IdentifierNode: res
+│       │                   IdentifierNode: base
 │           ReturnNode: yield
-│               IdentifierNode: resta
+│               IdentifierNode: res
 │   AssignmentNode: devote
-│   │   IdentifierNode: num
-│       LiteralNode: 20
+│   │   IdentifierNode: opcion
+│       LiteralNode: 0
+│   AssignmentNode: devote
+│   │   IdentifierNode: num1
+│       LiteralNode: 0
+│   AssignmentNode: devote
+│   │   IdentifierNode: num2
+│       LiteralNode: 0
 │   MultiPrintNode
-│       IdentifierNode: num
-│   AssignmentNode: devote
-│   │   IdentifierNode: num
-│       FunctionCallNode: cambiar
-│           IdentifierNode: num
-    MultiPrintNode
-        IdentifierNode: num
+│       LiteralNode: '============================'
+│   MultiPrintNode
+│       LiteralNode: 'CALCULADORA BASICA'
+│   MultiPrintNode
+│       LiteralNode: '============================'
+    WhileNode: vigil
+    │   BinaryOpNode: !=
+    │   │   IdentifierNode: opcion
+    │       LiteralNode: 6
+        BlockNode
+        │   MultiPrintNode
+        │       LiteralNode: '1. Sumar'
+        │   MultiPrintNode
+        │       LiteralNode: '2. Restar'
+        │   MultiPrintNode
+        │       LiteralNode: '3. Multiplicar'
+        │   MultiPrintNode
+        │       LiteralNode: '4. Dividir'
+        │   MultiPrintNode
+        │       LiteralNode: '5. Potencia'
+        │   MultiPrintNode
+        │       LiteralNode: '6. Salir'
+        │   MultiPrintNode
+        │       LiteralNode: 'Elija una opcion: '
+        │   AssignmentNode: devote
+        │   │   IdentifierNode: opcion
+        │       InputNode: inquire
+        │           LiteralNode: ''
+        │   IfNode: judge
+        │   │   BinaryOpNode: ==
+        │   │   │   IdentifierNode: opcion
+        │   │       LiteralNode: 1
+        │   │   BlockNode
+        │   │   │   MultiPrintNode
+        │   │   │       LiteralNode: 'Ingrese el primer numero: '
+        │   │   │   AssignmentNode: devote
+        │   │   │   │   IdentifierNode: num1
+        │   │   │       InputNode: inquire
+        │   │   │           LiteralNode: ''
+        │   │   │   MultiPrintNode
+        │   │   │       LiteralNode: 'Ingrese el segundo numero: '
+        │   │   │   AssignmentNode: devote
+        │   │   │   │   IdentifierNode: num2
+        │   │   │       InputNode: inquire
+        │   │   │           LiteralNode: ''
+        │   │   │   AssignmentNode: devote
+        │   │   │   │   IdentifierNode: res
+        │   │   │       FunctionCallNode: suma
+        │   │   │       │   IdentifierNode: num1
+        │   │   │           IdentifierNode: num2
+        │   │       MultiPrintNode
+        │   │       │   LiteralNode: 'Suma: '
+        │   │           IdentifierNode: res
+        │       BlockNode: exile
+        │           IfNode: judge
+        │           │   BinaryOpNode: ==
+        │           │   │   IdentifierNode: opcion
+        │           │       LiteralNode: 2
+        │           │   BlockNode
+        │           │   │   MultiPrintNode
+        │           │   │       LiteralNode: 'Ingrese el primer numero: '
+        │           │   │   AssignmentNode: devote
+        │           │   │   │   IdentifierNode: num1
+        │           │   │       InputNode: inquire
+        │           │   │           LiteralNode: ''
+        │           │   │   MultiPrintNode
+        │           │   │       LiteralNode: 'Ingrese el segundo numero: '
+        │           │   │   AssignmentNode: devote
+        │           │   │   │   IdentifierNode: num2
+        │           │   │       InputNode: inquire
+        │           │   │           LiteralNode: ''
+        │           │   │   AssignmentNode: devote
+        │           │   │   │   IdentifierNode: res
+        │           │   │       FunctionCallNode: resta
+        │           │   │       │   IdentifierNode: num1
+        │           │   │           IdentifierNode: num2
+        │           │       MultiPrintNode
+        │           │       │   LiteralNode: 'Resta: '
+        │           │           IdentifierNode: res
+        │               BlockNode: exile
+        │                   IfNode: judge
+        │                   │   BinaryOpNode: ==
+        │                   │   │   IdentifierNode: opcion
+        │                   │       LiteralNode: 3
+        │                   │   BlockNode
+        │                   │   │   MultiPrintNode
+        │                   │   │       LiteralNode: 'Ingrese el primer numero: '
+        │                   │   │   AssignmentNode: devote
+        │                   │   │   │   IdentifierNode: num1
+        │                   │   │       InputNode: inquire
+        │                   │   │           LiteralNode: ''
+        │                   │   │   MultiPrintNode
+        │                   │   │       LiteralNode: 'Ingrese el segundo numero: '
+        │                   │   │   AssignmentNode: devote
+        │                   │   │   │   IdentifierNode: num2
+        │                   │   │       InputNode: inquire
+        │                   │   │           LiteralNode: ''
+        │                   │   │   AssignmentNode: devote
+        │                   │   │   │   IdentifierNode: res
+        │                   │   │       FunctionCallNode: multiplicacion
+        │                   │   │       │   IdentifierNode: num1
+        │                   │   │           IdentifierNode: num2
+        │                   │       MultiPrintNode
+        │                   │       │   LiteralNode: 'Multiplicacion: '
+        │                   │           IdentifierNode: res
+        │                       BlockNode: exile
+        │                           IfNode: judge
+        │                           │   BinaryOpNode: ==
+        │                           │   │   IdentifierNode: opcion
+        │                           │       LiteralNode: 4
+        │                           │   BlockNode
+        │                           │   │   MultiPrintNode
+        │                           │   │       LiteralNode: 'Ingrese el primer numero: '
+        │                           │   │   AssignmentNode: devote
+        │                           │   │   │   IdentifierNode: num1
+        │                           │   │       InputNode: inquire
+        │                           │   │           LiteralNode: ''
+        │                           │   │   MultiPrintNode
+        │                           │   │       LiteralNode: 'Ingrese el segundo numero: '
+        │                           │   │   AssignmentNode: devote
+        │                           │   │   │   IdentifierNode: num2
+        │                           │   │       InputNode: inquire
+        │                           │   │           LiteralNode: ''
+        │                           │   │   AssignmentNode: devote
+        │                           │   │   │   IdentifierNode: res
+        │                           │   │       FunctionCallNode: division
+        │                           │   │       │   IdentifierNode: num1
+        │                           │   │           IdentifierNode: num2
+        │                           │       MultiPrintNode
+        │                           │       │   LiteralNode: 'Division: '
+        │                           │           IdentifierNode: res
+        │                               BlockNode: exile
+        │                                   IfNode: judge
+        │                                   │   BinaryOpNode: ==
+        │                                   │   │   IdentifierNode: opcion
+        │                                   │       LiteralNode: 5
+        │                                   │   BlockNode
+        │                                   │   │   MultiPrintNode
+        │                                   │   │       LiteralNode: 'Ingrese la base: '
+        │                                   │   │   AssignmentNode: devote
+        │                                   │   │   │   IdentifierNode: num1
+        │                                   │   │       InputNode: inquire
+        │                                   │   │           LiteralNode: ''
+        │                                   │   │   MultiPrintNode
+        │                                   │   │       LiteralNode: 'Ingrese el exponente: '
+        │                                   │   │   AssignmentNode: devote
+        │                                   │   │   │   IdentifierNode: num2
+        │                                   │   │       InputNode: inquire
+        │                                   │   │           LiteralNode: ''
+        │                                   │   │   AssignmentNode: devote
+        │                                   │   │   │   IdentifierNode: res
+        │                                   │   │       FunctionCallNode: potencia
+        │                                   │   │       │   IdentifierNode: num1
+        │                                   │   │           IdentifierNode: num2
+        │                                   │       MultiPrintNode
+        │                                   │       │   LiteralNode: 'Potencia: '
+        │                                   │           IdentifierNode: res
+        │                                       BlockNode: exile
+        │                                           IfNode: judge
+        │                                           │   BinaryOpNode: ==
+        │                                           │   │   IdentifierNode: opcion
+        │                                           │       LiteralNode: 6
+        │                                           │   BlockNode
+        │                                           │       MultiPrintNode
+        │                                           │           LiteralNode: 'Saliendo de la calculadora. Adios'
+        │                                               BlockNode: exile
+        │                                                   MultiPrintNode
+        │                                                       LiteralNode: 'Opcion no valida. Intente de nuevo'
+            MultiPrintNode
+                LiteralNode: '============================'
