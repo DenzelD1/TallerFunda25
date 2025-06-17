@@ -49,7 +49,7 @@ judge (valorSecreto != 42) {
     print("El valor secreto no es diferente de 42");
 }
 
-contado devote 3;
+contador devote 3;
 vigil (contador > 0) {
     print("Contador en:");
     print(contador);
