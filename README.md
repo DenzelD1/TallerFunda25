@@ -147,8 +147,7 @@ parias(capital);
 print("Capital despues del impuesto es:");
 print(capital);
 
-miEjercito devote inquire("¿Cuántos soldados tienes?: ");
-resultado devote conquistar("Bosque Profundo", miEjercito);
-print("¿Conquista exitosa?");
-print(resultado);
+miEjercito devote inquire("Ingresa soldados: ");
+defensaCiudad devote inquire("Ingresa defensa del pueblo: ");
+resultado devote conquistar("El Reino de los Pinos", miEjercito, defensaCiudad);
 ```

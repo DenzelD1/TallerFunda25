@@ -1,0 +1,12 @@
+x devote "Pueblo Derrota";
+conquistar(x,100,50);
+
+x devote "Pueblo Victoria";
+conquistar(x,100,150);
+
+x devote "Pueblo empate";
+conquistar(x,50,50);
+
+miEjercito devote inquire("Ingresa soldados: ");
+defensaCiudad devote inquire("Ingresa defensa del pueblo: ");
+resultado devote conquistar("El Reino de los Pinos", miEjercito, defensaCiudad);

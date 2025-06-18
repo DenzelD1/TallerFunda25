@@ -201,53 +201,84 @@ class InputNode(Node):
                 except ValueError: return user_input
         except Exception as e: raise EvaluationError(f"Error durante la entrada de datos: {e}")
 
-# Nodo para la función 'conquistar(pueblo, ejercito)' con lógica de batalla
+# Nodo para la función 'conquistar(pueblo, ejercito, defensa)' con lógica de batalla
 class ConquistarCallNode(Node):
-    def __init__(self, pueblo, ejercito):
+    def __init__(self, pueblo, ejercito, defensa):
         self.pueblo = pueblo
         self.ejercito = ejercito
+        self.defensa = defensa
 
     def get_label(self):
         return "ConquistarCallNode: conquistar"
 
     def get_children(self):
-        return [self.pueblo, self.ejercito]
+        return [self.pueblo, self.ejercito, self.defensa]
 
     def evaluate(self, context_stack):
         pueblo_val = self.pueblo.evaluate(context_stack)
 
-        ejercito_nombre = self.ejercito.name 
-        ejercito_val = context_stack[-1].get(ejercito_nombre, None)
-
-        if ejercito_val is None:
-            found = False
+        # Obtener valor del ejército (variable o literal)
+        if isinstance(self.ejercito, IdentifierNode):
+            ejercito_nombre = self.ejercito.name
+            ejercito_val = None
             for context in reversed(context_stack):
                 if ejercito_nombre in context:
                     ejercito_val = context[ejercito_nombre]
-                    found = True
                     break
-            if not found:
+            if ejercito_val is None:
                 raise EvaluationError(f"Variable '{ejercito_nombre}' no encontrada en el contexto.")
+        else:
+            ejercito_val = self.ejercito.evaluate(context_stack)
+            ejercito_nombre = None  # No se actualiza si no es variable
 
         if not isinstance(ejercito_val, int):
-             raise EvaluationError("Error: El ejército debe ser un número entero.")
+            raise EvaluationError("Error: El ejército debe ser un número entero.")
 
-        defensa = random.randint(10, 20000)
-        print(f"Pueblo '{pueblo_val}' tiene defensa {defensa}. Ejército disponible: {ejercito_val}")
+        # Obtener defensa desde argumento
+        defensa_val = self.defensa.evaluate(context_stack)
+        if not isinstance(defensa_val, int):
+            raise EvaluationError("Error: La defensa del pueblo debe ser un número entero.")
 
-        if ejercito_val > defensa:
+        print(f"Pueblo '{pueblo_val}' tiene defensa {defensa_val}. Ejército disponible: {ejercito_val}")
+
+        if ejercito_val > defensa_val:
             print(f"¡'{pueblo_val}' ha sido conquistado con éxito!")
             return True
+
+        elif ejercito_val == defensa_val:
+            print(f"¡Combate igualado! El destino decidirá...")
+            if random.random() < 0.5:
+                print(f"¡'{pueblo_val}' ha sido conquistado en una batalla pareja!")
+                return True
+            else:
+                perdidas = int(defensa_val * 0.3)
+                perdidas = min(perdidas, ejercito_val)
+                nuevo_valor = ejercito_val - perdidas
+
+                if ejercito_nombre:
+                    for context in reversed(context_stack):
+                        if ejercito_nombre in context:
+                            context[ejercito_nombre] = nuevo_valor
+                            break
+
+                print(f"'{pueblo_val}' resistió el ataque por suerte. El ejército perdió {perdidas} soldado(s) y ahora tiene {nuevo_valor}.")
+                return False
+
         else:
-            perdidas = int(defensa * 0.3)
+            perdidas = int(defensa_val * 0.3)
             perdidas = min(perdidas, ejercito_val)
             nuevo_valor = ejercito_val - perdidas
-            for context in reversed(context_stack):
-                if ejercito_nombre in context:
-                    context[ejercito_nombre] = nuevo_valor
-                    break
+
+            if ejercito_nombre:  # Solo si es una variable
+                for context in reversed(context_stack):
+                    if ejercito_nombre in context:
+                        context[ejercito_nombre] = nuevo_valor
+                        break
+
             print(f"'{pueblo_val}' resistió el ataque. El ejército perdió {perdidas} soldado(s) y ahora tiene {nuevo_valor}.")
             return False
+
+
 
 # Nodo para declarar funciones con 'decree'
 class FunctionDefNode(Node):
@@ -460,7 +491,10 @@ def p_print(p): 'print : PRINT PARIZQ expresiones_list PARDER'; p[0] = MultiPrin
 # Llamadas a funciones especiales
 def p_funcion_parias(p): 'expresion : PARIAS PARIZQ IDENTIFICADOR PARDER'; p[0] = PariasCallNode(p[3])
 def p_expresion_input(p): 'expresion : INQUIRE PARIZQ expresion PARDER'; p[0] = InputNode(p[3])
-def p_funcion_conquistar(p): 'expresion : CONQUISTAR PARIZQ expresion COMA expresion PARDER'; p[0] = ConquistarCallNode(p[3], p[5])
+def p_funcion_conquistar(p):
+    'expresion : CONQUISTAR PARIZQ expresion COMA expresion COMA expresion PARDER'
+    p[0] = ConquistarCallNode(p[3], p[5], p[7])
+
 
 # Llamada a funciones declaradas por el usuario
 def p_expresion_llamada_funcion(p):
